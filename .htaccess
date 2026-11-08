@@ -1,0 +1,16 @@
+# Al Oriyes Exchange - InfinityFree Apache Configuration
+# Force HTTPS for secure PWA & Service Worker execution
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Enable UTF-8 encoding by default
+AddDefaultCharset UTF-8
+
+# Cache settings
+<IfModule mod_headers.c>
+  # Service worker should not be aggressively cached
+  <Files "sw.js">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </Files>
+</IfModule>

@@ -1,0 +1,4329 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#047857">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="Al Oriyes Exchange Jeddah - প্রফেশনাল ক্যাশ কারেন্সি এক্সচেঞ্জ কাউন্টার (জেদ্দা, সৌদি আরব)">
+<title>Al Oriyes Exchange v12 – জেদ্দা ক্যাশ কাউন্টার (বাংলা / English)</title>
+
+<!-- PWA Manifest & Icons -->
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-title" content="Al Oriyes">
+
+<!-- High-Clarity Google Fonts: Hind Siliguri, Noto Sans Bengali & Plus Jakarta Sans -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+@keyframes slideUpPopup {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+#pwaInstallPopup {
+  animation: slideUpPopup 0.35s ease-out;
+}
+@media (min-width: 768px) {
+  #pwaInstallPopup {
+    bottom: 20px !important;
+    right: 20px !important;
+    left: auto !important;
+  }
+}
+
+/* ========================================================
+   FULL-BLEED 100% SCREEN-COVERAGE ENTERPRISE WHITE THEME
+======================================================== */
+:root {
+  --bg-page: #f1f5f9;         /* Modern soft tech grey-white */
+  --bg-card: #ffffff;
+  --bg-subtle: #f8fafc;
+  --bg-input: #ffffff;
+  
+  --brand-50: #ecfdf5;
+  --brand-100: #d1fae5;
+  --brand-200: #a7f3d0;
+  --brand-500: #10b981;
+  --brand-600: #059669;
+  --brand-700: #047857;
+  --brand-800: #065f46;
+  --brand-900: #022c22;
+  --brand-gradient: linear-gradient(135deg, #059669 0%, #047857 100%);
+  --brand-header-grad: linear-gradient(135deg, #047857 0%, #065f46 100%);
+  --brand-light-grad: linear-gradient(145deg, #f0fdf4 0%, #ffffff 100%);
+  
+  --gold-50: #fefce8;
+  --gold-100: #fef9c3;
+  --gold-500: #f59e0b;
+  --gold-600: #d97706;
+  --gold-700: #b45309;
+
+  --text-main: #090d16;
+  --text-muted: #334155;
+  --text-light: #64748b;
+  
+  --border-light: #e2e8f0;
+  --border-card: #cbd5e1;
+  --border-focus: #059669;
+  
+  --danger-50: #fef2f2;
+  --danger-600: #dc2626;
+  
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 2px 4px -1px rgba(15, 23, 42, 0.03);
+  --shadow-hover: 0 12px 26px -3px rgba(15, 23, 42, 0.1);
+  --shadow-modal: 0 25px 60px -15px rgba(15, 23, 42, 0.35);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-pill: 9999px;
+  
+  --font-bangla: "Hind Siliguri", "Noto Sans Bengali", system-ui, -apple-system, sans-serif;
+  --font-number: "Plus Jakarta Sans", "Hind Siliguri", sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-size: 15px;
+  overflow-x: hidden;
+}
+img, svg, video, canvas { max-width: 100%; }
+.container-fluid, .card-white, main.main-viewport { min-width: 0; max-width: 100%; }
+/* Inputs >=16px so Android/iOS browsers never auto-zoom on focus */
+input, select, textarea { font-size: 16px; max-width: 100%; }
+#inputCustomRate, #inputSearchCur, #custNameInput, #custPhoneInput, .denom-input { font-size: 16px !important; }
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: var(--font-bangla);
+  line-height: 1.55;
+  letter-spacing: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+}
+
+body.font-large {
+  font-size: 1.12rem;
+}
+body.font-large .tile-rate-val { font-size: 1.35rem !important; }
+body.font-large .result-big-value { font-size: 2.6rem !important; }
+body.font-large .input-amount-wrapper input { font-size: 2.1rem !important; }
+
+/* ========================================================
+   FULL-WIDTH ENTERPRISE SITE HEADER
+======================================================== */
+header.site-header {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 2px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.brand-logo-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: var(--brand-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+  flex-shrink: 0;
+}
+
+.brand-title-wrap {
+  min-width: 0;
+}
+
+.brand-title-wrap h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.brand-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  background: var(--brand-50);
+  color: var(--brand-800);
+  border: 1px solid var(--brand-200);
+  flex-shrink: 0;
+}
+
+.brand-subtitle {
+  margin: 2px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-500);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+  display: inline-block;
+  flex-shrink: 0;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.btn-pill-action {
+  height: 38px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  background: #ffffff;
+  border: 1.5px solid var(--border-light);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 38px;
+}
+
+.btn-pill-action:hover {
+  background: var(--brand-50);
+  border-color: var(--brand-300);
+  color: var(--brand-800);
+}
+
+.btn-pill-action.active {
+  background: var(--brand-800);
+  color: #ffffff;
+  border-color: var(--brand-800);
+}
+
+.btn-refresh {
+  background: var(--brand-50);
+  border-color: var(--brand-200);
+  color: var(--brand-800);
+}
+.btn-refresh:hover { background: var(--brand-100); }
+
+.btn-refresh.spinning svg {
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* ========================================================
+   FULL-WIDTH LIVE STATUS TICKER
+======================================================== */
+.api-live-bar {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-light);
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.78rem;
+}
+
+.api-live-bar-inner {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.api-meta-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.api-badge {
+  background: var(--brand-50);
+  color: var(--brand-800);
+  border: 1px solid var(--brand-200);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.countdown-chip {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* ========================================================
+   FULL-WIDTH RESPONSIVE MAIN CONTAINER
+======================================================== */
+main.main-viewport {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-fluid {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 12px 90px; /* Fully comfortable mobile bottom dock */
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+@media (min-width: 768px) {
+  .container-fluid {
+    padding: 18px 18px 30px;
+    gap: 18px;
+  }
+}
+
+.layout-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+.layout-grid > * { min-width: 0; }
+
+@media (min-width: 880px) {
+  .layout-grid {
+    grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+    gap: 18px;
+    align-items: start;
+  }
+}
+
+/* ========================================================
+   EDGE-TO-EDGE WHITE CARDS
+======================================================== */
+.card-white {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 16px 14px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  scroll-margin-top: 75px;
+}
+
+@media (min-width: 540px) {
+  .card-white {
+    padding: 20px 18px;
+    border-radius: var(--radius-xl);
+  }
+}
+
+.card-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1.5px solid #f1f5f9;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title svg {
+  color: var(--brand-600);
+  flex-shrink: 0;
+}
+
+.card-title-sub {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ========================================================
+   RATE HIGHLIGHT BANNER
+======================================================== */
+.rate-highlight-box {
+  width: 100%;
+  background: var(--brand-light-grad);
+  border: 1.5px solid var(--brand-200);
+  border-radius: var(--radius-md);
+  padding: 14px 12px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+
+.rate-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 6px;
+}
+
+.active-cur-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  min-width: 0;
+}
+
+.active-cur-badge span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active-flag-lg {
+  font-size: 1.9rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.rate-compare-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.rate-tile {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 10px 10px;
+  box-shadow: var(--shadow-xs);
+  min-width: 0;
+}
+
+.rate-tile.mine-tile {
+  border-color: var(--brand-500);
+  position: relative;
+}
+
+.rate-tile.mine-tile::before {
+  content: "অফার রেট";
+  position: absolute;
+  top: -9px;
+  right: 10px;
+  background: var(--brand-700);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+}
+
+.tile-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile-rate-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  font-family: var(--font-number);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile-rate-val.highlight {
+  color: var(--brand-700);
+}
+
+.tile-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ========================================================
+   CALCULATOR TABS & FULL-WIDTH INPUTS
+======================================================== */
+.calc-nav-tabs {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  background: var(--bg-subtle);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  margin-bottom: 14px;
+}
+
+.calc-tab-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 10px 6px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.calc-tab-btn.active {
+  background: #ffffff;
+  color: var(--brand-800);
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.input-block {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.input-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  gap: 6px;
+}
+
+.input-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.input-amount-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid var(--border-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-xs);
+}
+
+.input-amount-wrapper:focus-within {
+  border-color: var(--brand-600);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+}
+
+.input-amount-wrapper input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 12px 14px;
+  font-family: var(--font-number);
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--text-main);
+  outline: none;
+}
+
+.btn-clear-input {
+  border: none;
+  background: transparent;
+  color: var(--text-light);
+  font-size: 1.3rem;
+  padding: 0 10px;
+  cursor: pointer;
+  display: none;
+}
+.btn-clear-input:hover { color: var(--danger-600); }
+
+.input-currency-tag {
+  padding: 0 16px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--brand-800);
+  background: var(--brand-50);
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  border-left: 1.5px solid var(--brand-100);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-swap-pill {
+  background: #ffffff;
+  border: 1.5px solid var(--border-light);
+  color: var(--brand-700);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: var(--shadow-xs);
+  flex-shrink: 0;
+}
+
+/* Quick Amount Chips */
+.quick-chips-row {
+  width: 100%;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 2px 0 10px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.quick-chips-row::-webkit-scrollbar { display: none; }
+
+.chip-btn {
+  flex: none;
+  border: 1px solid var(--border-light);
+  background: #ffffff;
+  color: var(--text-main);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-number);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 36px;
+}
+
+.chip-btn:hover {
+  background: var(--brand-50);
+  border-color: var(--brand-200);
+  color: var(--brand-800);
+}
+
+/* ========================================================
+   FULL-WIDTH CALCULATION RESULT BOX
+======================================================== */
+.calc-result-box {
+  width: 100%;
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  border: 2px solid var(--brand-300);
+  border-radius: var(--radius-lg);
+  padding: 16px 12px;
+  margin-top: 10px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.08);
+  position: relative;
+}
+
+.result-target-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.result-big-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--brand-800);
+  line-height: 1.2;
+  word-break: break-word;
+  margin: 4px 0 6px;
+  font-family: var(--font-number);
+}
+
+.result-profit-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid var(--brand-200);
+  color: var(--brand-800);
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.84rem;
+  font-weight: 700;
+  margin-top: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.result-actions-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.btn-calc-action {
+  min-height: 44px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-card);
+  background: #ffffff;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 8px 10px;
+}
+
+.btn-calc-action:hover { background: var(--bg-subtle); }
+
+.btn-calc-action.whatsapp {
+  background: #25d366;
+  color: #ffffff;
+  border-color: #1ebd5b;
+}
+
+.btn-calc-action.receipt-btn {
+  background: var(--brand-gradient);
+  color: #ffffff;
+  border: none;
+}
+
+.btn-calc-action.full-width {
+  grid-column: 1 / -1;
+}
+
+/* ========================================================
+   MULTI-CURRENCY COMPARISON MATRIX (FULL-WIDTH)
+======================================================== */
+.matrix-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+}
+
+@media (min-width: 480px) {
+  .matrix-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.matrix-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.matrix-card:hover {
+  border-color: var(--brand-400);
+  background: var(--brand-50);
+}
+.matrix-flag { font-size: 1.35rem; line-height: 1; }
+.matrix-country { font-size: 0.74rem; font-weight: 700; color: var(--text-muted); margin-top: 2px; }
+.matrix-amount { font-size: 0.9rem; font-weight: 800; color: var(--brand-800); font-family: var(--font-number); margin-top: 1px; }
+
+/* ========================================================
+   CURRENCY SELECTOR & SEARCH GRID
+======================================================== */
+.search-wrapper {
+  width: 100%;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  pointer-events: none;
+}
+
+.input-search {
+  width: 100%;
+  height: 42px;
+  border: 1.5px solid var(--border-light);
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 6px 12px 6px 36px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  outline: none;
+}
+.input-search:focus { border-color: var(--brand-600); }
+
+.region-filters {
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+  scrollbar-width: none;
+}
+.region-filters::-webkit-scrollbar { display: none; }
+
+.region-btn {
+  flex: none;
+  border: 1px solid var(--border-light);
+  background: #ffffff;
+  color: var(--text-muted);
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 32px;
+}
+
+.region-btn.active {
+  background: var(--brand-800);
+  color: #ffffff;
+  border-color: var(--brand-800);
+}
+
+.currencies-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 2px;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 480px) {
+  .currencies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+    gap: 8px;
+  }
+}
+
+.currency-card-btn {
+  background: #ffffff;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  min-height: 68px;
+}
+
+.currency-card-btn:active, .currency-card-btn.active {
+  border-color: var(--brand-600);
+  background: var(--brand-50);
+  box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+}
+
+.currency-card-btn .btn-flag {
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.currency-card-btn .btn-cname {
+  font-size: 0.72rem;
+  color: var(--text-main);
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+}
+
+.currency-card-btn .btn-code {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--brand-700);
+  font-family: var(--font-number);
+}
+
+.currency-card-btn .btn-pin {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  opacity: 0.35;
+  background: none;
+  border: none;
+  padding: 2px;
+  line-height: 1;
+  font-size: 0.75rem;
+}
+.currency-card-btn.pinned .btn-pin {
+  opacity: 1;
+  color: var(--gold-500);
+}
+
+/* ========================================================
+   RATE TABLE / BOARD
+======================================================== */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  -webkit-overflow-scrolling: touch;
+}
+
+table.rate-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+  background: #ffffff;
+  text-align: left;
+}
+
+table.rate-table th {
+  background: #f8fafc;
+  color: var(--text-muted);
+  font-weight: 800;
+  font-size: 0.74rem;
+  padding: 8px 10px;
+  border-bottom: 1.5px solid var(--border-light);
+  white-space: nowrap;
+}
+
+table.rate-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+/* ========================================================
+   DAILY TRANSACTIONS LEDGER
+======================================================== */
+.ledger-stat-bar {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.stat-tile {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 6px;
+  text-align: center;
+  box-shadow: var(--shadow-xs);
+}
+
+.stat-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--brand-800);
+  line-height: 1.2;
+  font-family: var(--font-number);
+}
+
+.stat-lbl {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* ========================================================
+   OVERRIDE & MARGIN CONTROLS
+======================================================== */
+.override-container {
+  width: 100%;
+  background: #ffffff;
+  border: 1px dashed var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 12px 10px;
+  margin-top: 10px;
+}
+
+.override-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.override-input {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  outline: none;
+  font-family: var(--font-number);
+}
+
+.btn-secondary {
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border-light);
+  background: #ffffff;
+  color: var(--text-main);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.margin-presets {
+  display: flex;
+  gap: 6px;
+  margin: 6px 0 10px;
+  flex-wrap: wrap;
+}
+
+.margin-pill {
+  border: 1px solid var(--border-light);
+  background: #ffffff;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.76rem;
+  font-weight: 800;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+.margin-pill.active {
+  background: var(--brand-700);
+  color: #fff;
+  border-color: var(--brand-700);
+}
+
+/* ========================================================
+   MOBILE NATIVE BOTTOM DOCK BAR
+======================================================== */
+.mobile-bottom-dock {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1.5px solid var(--border-light);
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+  z-index: 45;
+  box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.05);
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media (min-width: 880px) {
+  .mobile-bottom-dock {
+    display: none;
+  }
+}
+
+.dock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+  min-width: 54px;
+}
+
+.dock-item svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dock-item:active, .dock-item:hover {
+  color: var(--brand-700);
+  background: var(--brand-50);
+}
+
+/* ========================================================
+   MODALS (BOTTOM SHEET ON MOBILE, CENTER ON PC)
+======================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+@media (min-width: 540px) {
+  .modal-overlay {
+    align-items: center;
+    padding: 16px;
+  }
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: #ffffff;
+  border-radius: 20px 20px 0 0;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-modal);
+  transform: translateY(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+@media (min-width: 540px) {
+  .modal-card {
+    border-radius: var(--radius-xl);
+    transform: translateY(20px) scale(0.97);
+  }
+}
+
+.modal-overlay.open .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body {
+  padding: 16px 14px 30px;
+}
+
+/* ========================================================
+   AUTHENTIC JEDDAH PHYSICAL CASH RECEIPT SLIP
+======================================================== */
+.receipt-slip {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px dashed #94a3b8;
+  border-radius: var(--radius-md);
+  padding: 16px 14px;
+  position: relative;
+}
+
+.slip-header {
+  text-align: center;
+  border-bottom: 1.5px dashed #cbd5e1;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.slip-biz-name {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--brand-900);
+  margin: 0;
+}
+
+.slip-tagline {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--brand-800);
+  margin-top: 2px;
+}
+
+.slip-location {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.slip-meta-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.slip-divider {
+  border: none;
+  border-top: 1px dashed #cbd5e1;
+  margin: 10px 0;
+}
+
+.slip-data-table {
+  width: 100%;
+  font-size: 0.84rem;
+  border-collapse: collapse;
+}
+
+.slip-data-table td {
+  padding: 6px 0;
+}
+
+.slip-data-table td:last-child {
+  text-align: right;
+  font-weight: 800;
+}
+
+.slip-total-box {
+  width: 100%;
+  background: var(--brand-50);
+  border: 1.5px solid var(--brand-300);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slip-total-val {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--brand-900);
+  font-family: var(--font-number);
+}
+
+.slip-security-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.barcode-svg {
+  height: 24px;
+  width: 120px;
+}
+
+.slip-footer {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+@media print {
+  @page { size: 80mm auto; margin: 3mm; }
+  body * { visibility: hidden; }
+  .modal-overlay.open .receipt-slip, .modal-overlay.open .receipt-slip * { visibility: visible; }
+  .modal-overlay.open .receipt-slip {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    border: none;
+    padding: 0;
+  }
+}
+
+/* ========================================================
+   CASH DENOMINATION
+======================================================== */
+.denom-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+.denom-row {
+  display: grid;
+  grid-template-columns: 75px 1fr 90px;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.denom-badge {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--brand-800);
+  font-family: var(--font-number);
+}
+
+.denom-input {
+  width: 100%;
+  height: 38px;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.05rem;
+  font-family: var(--font-number);
+}
+
+.denom-subtotal {
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--text-main);
+  font-family: var(--font-number);
+}
+
+/* ========================================================
+   TOAST NOTIFICATION
+======================================================== */
+#toast {
+  position: fixed;
+  bottom: 72px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #090d16;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 0.86rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  z-index: 200;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+#toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Footer info */
+.site-footer {
+  width: 100%;
+  text-align: center;
+  padding: 16px 10px 40px;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  border-top: 1px solid var(--border-light);
+  background: #ffffff;
+  margin-top: auto;
+}
+
+
+/* ===== CUSTOMER VIEW & LOSS WARNING ===== */
+body.customer-view #calcProfitChip,
+body.customer-view #hlOfferMargin,
+body.customer-view .rate-compare-grid .rate-tile:first-child,
+body.customer-view #sectionLedger,
+body.customer-view #boardTableBody td:nth-child(2) { display: none !important; }
+body.customer-view table:has(#boardTableBody) th:nth-child(2) { display: none !important; }
+body.customer-view .rate-compare-grid { grid-template-columns: 1fr; }
+#btnCustomerView.active { background: var(--brand-700); color: #fff; }
+.loss-text { color: var(--danger-600); font-weight: 800; }
+.pk-chip { flex: 0 0 auto; border: 1.5px solid var(--border-card); background: #fff; color: var(--text-muted); border-radius: var(--radius-pill); padding: 6px 12px; font: 700 0.8rem var(--font-bangla); cursor: pointer; }
+.pk-chip.active { background: var(--brand-700); border-color: var(--brand-700); color: #fff; }
+.pk-row { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; border: 1.5px solid var(--border-light); background: #fff; border-radius: var(--radius-md); padding: 9px 12px; cursor: pointer; font-family: var(--font-bangla); }
+.pk-row:active, .pk-row:hover { background: var(--brand-50); }
+.pk-row.sel { border-color: var(--brand-600); background: var(--brand-50); }
+.pk-flag { font-size: 1.5rem; }
+.pk-star { font-size: 1.25rem; color: var(--gold-500); padding: 2px 6px; }
+.pk-name { flex: 1; font-weight: 700; color: var(--text-main); line-height: 1.2; }
+.pk-name small { display: block; color: var(--text-light); font-weight: 600; font-family: var(--font-number); }
+.pk-rate { font: 800 0.8rem var(--font-number); color: var(--brand-700); text-align: right; }
+
+/* ===== MOBILE FIT FIXES ===== */
+.tile-rate-val { font-size: clamp(0.88rem, 4vw, 1.15rem); white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.25; word-break: keep-all; }
+.brand-title-wrap h1 { flex-wrap: wrap; white-space: normal; overflow: visible; row-gap: 2px; }
+@media (max-width: 400px) {
+  .brand-title-wrap h1 { font-size: 1rem; }
+  .brand-subtitle { font-size: 0.72rem; }
+  .btn-pill-action { padding: 0 8px; }
+}
+.modal-card { max-width: 100%; }
+.modal-body { overflow-x: hidden; }
+
+.api-meta-left { flex-wrap: wrap; white-space: normal; row-gap: 2px; }
+#lastUpdatedTime { line-height: 1.3; }
+
+/* ===== CLEAR SELECTED STATE FOR MODE TABS ===== */
+.calc-nav-tabs { background: #e2e8f0; padding: 5px; gap: 6px; }
+.calc-nav-tabs .calc-tab-btn {
+  position: relative;
+  background: #f8fafc;
+  color: #475569;
+  border: 2px solid transparent;
+  font-weight: 700;
+  box-shadow: none;
+  opacity: 0.9;
+  -webkit-tap-highlight-color: transparent;
+}
+.calc-nav-tabs .calc-tab-btn:active { transform: scale(0.97); }
+.calc-nav-tabs .calc-tab-btn.active {
+  background: var(--brand-gradient);
+  color: #ffffff;
+  border-color: var(--brand-800);
+  font-weight: 800;
+  opacity: 1;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
+}
+/* tick badge on the selected tab */
+.calc-nav-tabs .calc-tab-btn.active::after {
+  content: "✓";
+  position: absolute;
+  top: -7px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--brand-700);
+  border: 2px solid var(--brand-700);
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 16px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 400px) {
+  .calc-nav-tabs .calc-tab-btn { font-size: 0.82rem; padding: 8px 4px; gap: 4px; }
+  .calc-nav-tabs .calc-tab-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand-wrapper">
+      <div class="brand-logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M14.8 9A2 2 0 0 0 13 8h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1-1.8-1"/>
+          <path d="M12 6v2m0 8v2"/>
+        </svg>
+      </div>
+      <div class="brand-title-wrap">
+        <h1>
+          AL ORIYES
+          <span class="brand-badge">জেদ্দা · JEDDAH</span>
+        </h1>
+        <div class="brand-subtitle">
+          <span class="live-dot" id="liveDot"></span>
+          <span id="headerStatus">আজকের রেট লোড হচ্ছে…</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <!-- Language toggle (বাংলা / English) -->
+      <button class="btn-pill-action" id="btnToggleLang" title="ভাষা পরিবর্তন / Switch Language" style="min-width:62px; padding:0 8px;">
+        <span style="font-weight:800; font-size:0.75rem;" id="langBtnText">বাং / EN</span>
+      </button>
+
+      <!-- Font size toggle -->
+      <button class="btn-pill-action" id="btnToggleFontSize" title="বড় লেখা">
+        <span style="font-weight:800;">অ/A</span>
+      </button>
+
+      <!-- Install App Button (PWA) -->
+      <button class="btn-pill-action" id="btnInstallPWA" style="display:none; font-size:0.75rem; font-weight:800; background:var(--brand-50); color:var(--brand-800); border-color:var(--brand-200); padding:0 8px;" title="মোবাইল বা কম্পিউটারে অ্যাপ হিসেবে ইনস্টল করুন">
+        📲 ইনস্টল
+      </button>
+
+      <!-- Customer view (hides market rate & profit) -->
+      <button class="btn-pill-action" id="btnCustomerView" title="কাস্টমার ভিউ (লাভ ও মার্কেট রেট লুকান)"><span>👁</span></button>
+
+      <!-- Live Rate Refresh -->
+      <button class="btn-pill-action btn-refresh" id="btnRefresh" title="রেট রিফ্রেশ (রেট দিনে একবার আপডেট হয়)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+          <path d="M21 3v5h-5"/>
+          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+          <path d="M8 16H3v5"/>
+        </svg>
+      </button>
+
+      <!-- Sound Toggle -->
+      <button class="btn-pill-action" id="btnToggleSound" title="সাউন্ড" style="padding:0 8px;">
+        <svg id="soundIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- OFFLINE WARNING BANNER -->
+<div id="offlineBanner" style="display:none; background:#fef2f2; color:#b91c1c; border-bottom:1.5px solid #fecaca; padding:8px 14px; font-size:0.82rem; font-weight:700; text-align:center; align-items:center; justify-content:center; gap:8px;">
+  <span style="font-size:1.1rem; line-height:1;">📡</span>
+  <span data-i18n="offlineBannerText">ইন্টারনেট সংযোগ নেই (অফলাইন মোড)। আপনার সেভ করা রেটে ক্যাশ কাউন্টার ও হিসাব খাতা সম্পূর্ণ স্বাভাবিকভাবে সচল রয়েছে।</span>
+</div>
+
+<!-- LIVE STATUS TICKER BAR -->
+<div class="api-live-bar">
+  <div class="api-live-bar-inner">
+    <div class="api-meta-left">
+      <span class="api-badge" id="apiEngineBadge">Open ER-API</span>
+      <span style="font-size:0.75rem; color:var(--text-muted);" id="lastUpdatedTime">—</span>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:6px;">
+      <div class="countdown-chip" title="পরবর্তী অটো-চেক (রেট দিনে একবার আপডেট হয়)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span id="countdownTimer">০২:০০</span>
+      </div>
+      <button class="btn-secondary" id="btnExportCSV" style="min-height:30px; padding:0 8px; font-size:0.74rem;" title="এক্সেল ডাউনলোড">
+        📥 CSV
+      </button>
+    </div>
+  </div>
+</div>
+
+<main class="main-viewport">
+  <div class="container-fluid">
+    <div class="layout-grid">
+
+      <!-- LEFT COLUMN / MAIN COUNTER CARD (100% VISIBLE & NATURAL FLOW) -->
+      <div style="display:flex; flex-direction:column; gap:14px; width:100%;">
+        
+        <!-- CALCULATOR CARD -->
+        <div class="card-white" id="sectionCalculator">
+          <div class="card-header">
+            <div class="card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2"/>
+                <line x1="8" y1="6" x2="16" y2="6"/>
+                <line x1="16" y1="14" x2="16" y2="18"/>
+                <path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/>
+              </svg>
+              <span data-i18n="calcHeaderTitle">ক্যাশ মানি এক্সচেঞ্জ</span>
+            </div>
+            <button type="button" id="btnPickCurrency" class="btn-swap-pill" style="border-color:var(--brand-300); color:var(--brand-800); background:var(--brand-50); cursor:pointer;">
+              <span id="curPickLabel">কারেন্সি বদলান</span> ⬇
+            </button>
+          </div>
+
+          <!-- SELECTED CURRENCY LIVE RATE TILE -->
+          <div class="rate-highlight-box">
+            <div class="rate-badge-row">
+              <div class="active-cur-badge">
+                <span class="active-flag-lg" id="highlightFlag">🇧🇩</span>
+                <span id="highlightName">বাংলাদেশ</span>
+                <span style="font-size:0.88rem; color:var(--text-muted); font-weight:800;" id="highlightCode">(BDT)</span>
+              </div>
+              <button class="btn-swap-pill" id="btnQuickSwapCur" title="দিক পরিবর্তন করুন">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m7 16 5 5 5-5M12 21V3M17 8l-5-5-5 5"/>
+                </svg>
+                <span>অদলবদল (⇄)</span>
+              </button>
+            </div>
+
+            <div class="rate-compare-grid">
+              <div class="rate-tile">
+                <div class="tile-label">মার্কেট রেট:</div>
+                <div class="tile-rate-val" id="hlMarketRate">১ SAR = --</div>
+                <div class="tile-sub" id="hlMarketAlt">--</div>
+              </div>
+              <div class="rate-tile mine-tile">
+                <div class="tile-label" id="hlOfferTitle">দোকানের রেট:</div>
+                <div class="tile-rate-val highlight" id="hlOfferRate">১ SAR = --</div>
+                <div class="tile-sub" id="hlOfferMargin">মার্জিন: ১% লাভ</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CALCULATOR MODE TABS (JEDDAH CASH EXCHANGE WORKFLOW) -->
+          <div class="calc-nav-tabs">
+            <button class="calc-tab-btn active" id="tabBuyCur" data-mode="buy">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span id="tabBuyLabel">টাকা এনেছে ➔ রিয়াল দেব</span>
+            </button>
+            <button class="calc-tab-btn" id="tabSellCur" data-mode="sell">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+              <span id="tabSellLabel">SAR এনেছে ➔ টাকা দেব</span>
+            </button>
+          </div>
+
+          <!-- AMOUNT INPUT -->
+          <div class="input-block">
+            <div class="input-label-row">
+              <label class="input-label" id="calcInputLabel">কাস্টমার কত বিদেশি ক্যাশ (BDT) দিচ্ছে?</label>
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">নোট বাটন ⬇</span>
+            </div>
+
+            <div class="input-amount-wrapper">
+              <input type="number" id="calcInputAmount" inputmode="decimal" placeholder="0" value="1000" min="0" step="any">
+              <button class="btn-clear-input" id="btnClearInput" title="ক্লিয়ার">&times;</button>
+              <div class="input-currency-tag" id="calcInputCurTag">BDT</div>
+            </div>
+          </div>
+
+          <!-- QUICK AMOUNT CHIPS -->
+          <div class="quick-chips-row" id="quickChipsRow">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- CALCULATION RESULT BOX -->
+          <div class="calc-result-box">
+            <div class="result-target-label" id="calcResultLabel">কাস্টমার ক্যাশ পাবে (সৌদি রিয়াল):</div>
+            <div class="result-big-value" id="calcResultValue">০.০০ SAR</div>
+            
+            <div>
+              <div class="result-profit-chip" id="calcProfitChip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span id="calcProfitText">হিসাব হচ্ছে…</span>
+              </div>
+            </div>
+
+            <!-- ACTION BUTTONS: WHATSAPP, RECEIPT, SAVE TO LEDGER -->
+            <div class="result-actions-row">
+              <button class="btn-calc-action whatsapp" id="btnShareWhatsApp">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+                <span data-i18n="btnWAQuote">হোয়াটসঅ্যাপ</span>
+              </button>
+              <button class="btn-calc-action receipt-btn" id="btnOpenReceiptModal">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                <span data-i18n="btnReceipt">ক্যাশ ভাউচার</span>
+              </button>
+              <button class="btn-calc-action full-width" id="btnSaveToLedger">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.3"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                <span data-i18n="btnSaveLedger">আজকের হিসাব খাতায় সেভ করুন</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- CUSTOM RATE OVERRIDE & MARGIN CONFIG -->
+          <details style="margin-top:14px;">
+            <summary style="font-size:0.86rem; font-weight:800; color:var(--brand-700); cursor:pointer; padding:4px 0;">
+              <span data-i18n="customRateSummary">⚙️ নিজের কাস্টম রেট ও মার্জিন সেটিং</span>
+            </summary>
+            <div class="override-container">
+              <div style="font-size:0.8rem; font-weight:700; color:var(--text-main); margin-bottom:4px;">
+                এই কারেন্সির জন্য সরাসরি রেট সেট করুন <b id="customRateModeLabel" style="color:var(--brand-700);"></b>:
+                <span id="customRateHelp" style="display:block; font-size:0.75rem; color:var(--text-muted); font-weight:600; margin-top:2px;"></span>
+              </div>
+              <div class="override-row">
+                <input type="number" class="override-input" id="inputCustomRate" step="any" min="0" placeholder="যেমন: 33.70">
+                <button class="btn-secondary" id="btnApplyCustomRate">সেভ</button>
+                <button class="btn-secondary" id="btnClearCustomRate" style="color:var(--danger-600);" title="মুছুন">রিসেট</button>
+              </div>
+
+              <div style="margin-top:10px; border-top:1px dashed var(--border-light); padding-top:8px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <label style="font-size:0.8rem; font-weight:800;" data-i18n="marginLabel">দোকানের লাভ মার্জিন (%):</label>
+                  <span id="currentMarginDisplay" style="font-size:0.86rem; font-weight:800; color:var(--brand-800);">১.০%</span>
+                </div>
+                <div class="margin-presets">
+                  <button class="margin-pill" data-m="0.5">০.৫%</button>
+                  <button class="margin-pill active" data-m="1.0">১.০%</button>
+                  <button class="margin-pill" data-m="1.5">১.৫%</button>
+                  <button class="margin-pill" data-m="2.0">২.০%</button>
+                  <button class="margin-pill" data-m="3.0">৩.০%</button>
+                </div>
+                <input type="range" id="sliderMargin" min="0" max="10" step="0.1" value="1.0" style="width:100%; accent-color:var(--brand-600); cursor:pointer;">
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <!-- TODAY'S LEDGER (FULLY VISIBLE & ACCESSIBLE) -->
+        <div class="card-white" id="sectionLedger">
+          <div class="card-header">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              <span data-i18n="ledgerTitle">জেদ্দা কাউন্টার হিসাব খাতা</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+              <button class="btn-secondary" id="btnDailyClosing" style="font-size:0.75rem; padding:2px 8px; min-height:30px; font-weight:700;" title="সারাদিনের মোট লেনদেন ও ড্রয়ার ক্লোজিং সামারি স্লিপ দেখুন">📊 ক্লোজিং স্লিপ</button>
+              <button class="btn-secondary" id="btnBackupJSON" style="font-size:0.75rem; padding:2px 8px; min-height:30px;" title="সম্পূর্ণ হিসাব ও সেটিংস ব্যাকআপ ফাইল নামান">💾 ব্যাকআপ</button>
+              <button class="btn-secondary" id="btnRestoreJSON" style="font-size:0.75rem; padding:2px 8px; min-height:30px;" title="পূর্বে সেভ করা ব্যাকআপ ফাইল রিস্টোর করুন">📂 রিস্টোর</button>
+              <button class="btn-secondary" id="btnClearLedger" style="font-size:0.75rem; padding:2px 8px; min-height:30px;">খালি করুন</button>
+              <input type="file" id="inputRestoreJSON" accept=".json" style="display:none;">
+            </div>
+          </div>
+
+          <div class="ledger-stat-bar">
+            <div class="stat-tile">
+              <div class="stat-val" id="statTotalTrans">০ টি</div>
+              <div class="stat-lbl" data-i18n="statTotalTrans">মোট কাস্টমার</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-val" id="statTotalVolume">০ SAR</div>
+              <div class="stat-lbl" data-i18n="statTotalVolume">মোট রিয়াল লেনদেন</div>
+            </div>
+            <div class="stat-tile" style="background:var(--brand-50); border-color:var(--brand-200);">
+              <div class="stat-val" style="color:var(--brand-800);" id="statTotalProfit">০ SAR</div>
+              <div class="stat-lbl" style="color:var(--brand-800);" data-i18n="statTotalProfit">দোকানের মোট লাভ</div>
+            </div>
+          </div>
+
+          <div class="table-responsive" style="max-height: 260px;">
+            <table class="rate-table">
+              <thead>
+                <tr>
+                  <th data-i18n="thTime">সময়</th>
+                  <th data-i18n="thType">ধরন</th>
+                  <th data-i18n="thInward">জমা</th>
+                  <th data-i18n="thPayout">পরিশোধ</th>
+                  <th data-i18n="thProfit">লাভ</th>
+                  <th data-i18n="thDelete">মুছুন</th>
+                </tr>
+              </thead>
+              <tbody id="ledgerTableBody">
+                <tr>
+                  <td colspan="6" style="text-align:center; color:var(--text-light); padding:16px;">
+                    আজকের কোনো এক্সচেঞ্জ এখনো খাতাভুক্ত করা হয়নি।
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN / CURRENCIES & LIVE BOARD (100% VISIBLE & NATURAL FLOW) -->
+      <div style="display:flex; flex-direction:column; gap:14px; width:100%;">
+        
+        <!-- ALL CURRENCIES EXCHANGE RATE BOARD -->
+        <div class="card-white" id="sectionRateBoard">
+          <div class="card-header">
+            <div class="card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
+              </svg>
+              <span data-i18n="boardTitle">জেদ্দা কাউন্টার রেট বোর্ড</span>
+            </div>
+            <span class="card-title-sub">ক্লিক করে সিলেক্ট করুন</span>
+          </div>
+
+          <div class="table-responsive" style="max-height: 380px;">
+            <table class="rate-table">
+              <thead>
+                <tr>
+                  <th data-i18n="thCountryCur">দেশ ও কারেন্সি</th>
+                  <th data-i18n="thMarketRate">মার্কেট রেট</th>
+                  <th data-i18n="thOurOffer">আমাদের অফার</th>
+                </tr>
+              </thead>
+              <tbody id="boardTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div style="font-weight:700; color:var(--text-main); margin-bottom:2px;">AL ORIYES CURRENCY EXCHANGE</div>
+  <div>জেদ্দা শাখা, কিংডম অব সৌদি আরব · প্রফেশনাল ক্যাশ এক্সচেঞ্জ কাউন্টার</div>
+  <div style="margin-top:4px;">রেট সূত্র: <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">exchangerate-api.com</a> · <a href="https://github.com/fawazahmed0/exchange-api" target="_blank" rel="noopener">fawazahmed0/exchange-api</a> (দৈনিক মিড-মার্কেট রেট)</div>
+</footer>
+
+<!-- ========================================================
+   MOBILE NATIVE BOTTOM DOCK (QUICK SCROLL JUMPERS)
+======================================================== -->
+<nav class="mobile-bottom-dock">
+  <button class="dock-item" onclick="scrollToElement('sectionCalculator')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <rect x="4" y="2" width="16" height="20" rx="2"/>
+      <line x1="8" y1="6" x2="16" y2="6"/>
+      <line x1="16" y1="14" x2="16" y2="18"/>
+      <path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/>
+    </svg>
+    <span data-i18n="dockCounter">কাউন্টার</span>
+  </button>
+  <button class="dock-item" onclick="openPicker()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    </svg>
+    <span data-i18n="dockCurrencies">কারেন্সি</span>
+  </button>
+  <button class="dock-item" id="dockNavDenom">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <rect x="2" y="6" width="20" height="12" rx="2"/>
+      <circle cx="12" cy="12" r="2"/>
+      <path d="M6 12h.01M18 12h.01"/>
+    </svg>
+    <span data-i18n="dockNotes">নোট গণনা</span>
+  </button>
+  <button class="dock-item" id="dockNavReceipt">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+      <polyline points="14 2 14 8 20 8"/>
+    </svg>
+    <span data-i18n="dockReceipt">ক্যাশ ভাউচার</span>
+  </button>
+  <button class="dock-item" onclick="scrollToElement('sectionLedger')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+    </svg>
+    <span data-i18n="dockLedger">হিসাব খাতা</span>
+  </button>
+</nav>
+
+<!-- ========================================================
+     MODAL 1: JEDDAH CASH CURRENCY EXCHANGE RECEIPT
+======================================================== -->
+<div class="modal-overlay" id="receiptModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 class="modal-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        ক্যাশ মানি এক্সচেঞ্জ ভাউচার
+      </h3>
+      <button class="modal-close-btn" id="btnCloseReceipt">&times;</button>
+    </div>
+
+    <div class="modal-body">
+      <!-- CUSTOMER INPUT FORM (OPTIONAL) -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+        <div>
+          <label style="font-size:0.75rem; font-weight:700; color:var(--text-muted);">কাস্টমারের নাম:</label>
+          <input type="text" id="custNameInput" placeholder="ঐচ্ছিক" style="width:100%; height:36px; border:1px solid var(--border-light); border-radius:6px; padding:2px 8px; font-size:0.86rem; font-family:inherit;">
+        </div>
+        <div>
+          <label style="font-size:0.75rem; font-weight:700; color:var(--text-muted);">মোবাইল নং:</label>
+          <input type="text" id="custPhoneInput" placeholder="05XXXXXXXX" style="width:100%; height:36px; border:1px solid var(--border-light); border-radius:6px; padding:2px 8px; font-size:0.86rem; font-family:inherit;">
+        </div>
+      </div>
+
+      <!-- PRINTABLE JEDDAH SLIP -->
+      <div class="receipt-slip" id="printableSlip">
+        <div class="slip-header">
+          <h2 class="slip-biz-name">AL ORIYES EXCHANGE</h2>
+          <div class="slip-tagline">ক্যাশ ফরেন কারেন্সি এক্সচেঞ্জ কাউন্টার</div>
+          <div class="slip-location">জেদ্দা শাখা · কিংডম অব সৌদি আরব (Jeddah, KSA)</div>
+        </div>
+
+        <div class="slip-meta-row">
+          <span>ভাউচার: <b id="slipVoucherNo">AO-JED-01</b></span>
+          <span id="slipDateTime">05 Nov 2026</span>
+        </div>
+        <div class="slip-meta-row" id="slipCustRow" style="display:none;">
+          <span>কাস্টমার: <b id="slipCustName">—</b></span>
+          <span id="slipCustPhone">—</span>
+        </div>
+
+        <hr class="slip-divider">
+
+        <table class="slip-data-table">
+          <tr>
+            <td style="color:var(--text-muted);">লেনদেনের ধরন:</td>
+            <td id="slipType">কারেন্সি ক্রয় (SAR প্রদান)</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-muted);">কাস্টমার জমা দিয়েছে:</td>
+            <td id="slipInward">১,০০০.০০ BDT</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-muted);">এক্সচেঞ্জ রেট:</td>
+            <td id="slipAppliedRate">১ SAR = ৩৩.৭০ BDT</td>
+          </tr>
+        </table>
+
+        <div class="slip-total-box">
+          <div>
+            <div style="font-size:0.78rem; font-weight:700; color:var(--text-muted);" id="slipTotalLabel">কাস্টমারকে প্রদেয় ক্যাশ:</div>
+            <div class="slip-total-val" id="slipTotalAmount">২৯৬.৭৪ SAR</div>
+          </div>
+          <div style="font-size:1.8rem; line-height:1;" id="slipFlagIcon">🇧🇩</div>
+        </div>
+
+        <div class="slip-security-wrap">
+          <svg class="barcode-svg" viewBox="0 0 100 20">
+            <rect x="0" y="0" width="3" height="20" fill="#000"/>
+            <rect x="5" y="0" width="2" height="20" fill="#000"/>
+            <rect x="9" y="0" width="5" height="20" fill="#000"/>
+            <rect x="16" y="0" width="2" height="20" fill="#000"/>
+            <rect x="20" y="0" width="4" height="20" fill="#000"/>
+            <rect x="26" y="0" width="1" height="20" fill="#000"/>
+            <rect x="29" y="0" width="4" height="20" fill="#000"/>
+            <rect x="35" y="0" width="3" height="20" fill="#000"/>
+            <rect x="40" y="0" width="2" height="20" fill="#000"/>
+            <rect x="44" y="0" width="5" height="20" fill="#000"/>
+            <rect x="51" y="0" width="3" height="20" fill="#000"/>
+            <rect x="56" y="0" width="2" height="20" fill="#000"/>
+            <rect x="60" y="0" width="4" height="20" fill="#000"/>
+            <rect x="66" y="0" width="2" height="20" fill="#000"/>
+            <rect x="70" y="0" width="5" height="20" fill="#000"/>
+            <rect x="77" y="0" width="2" height="20" fill="#000"/>
+            <rect x="81" y="0" width="4" height="20" fill="#000"/>
+            <rect x="87" y="0" width="2" height="20" fill="#000"/>
+            <rect x="91" y="0" width="3" height="20" fill="#000"/>
+            <rect x="96" y="0" width="4" height="20" fill="#000"/>
+          </svg>
+          <span style="font-size:0.7rem; font-weight:700; color:var(--text-light);">JEDDAH-OK</span>
+        </div>
+
+        <div class="slip-footer">
+          <div>আল ওরিয়েস এক্সচেঞ্জে আসার জন্য ধন্যবাদ! ক্যাশ বুঝে নিন।</div>
+        </div>
+      </div>
+
+      <!-- MODAL ACTIONS -->
+      <div style="display:flex; gap:8px; margin-top:14px;">
+        <button class="btn-calc-action receipt-btn" id="btnPrintReceipt" style="flex:1;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          প্রিন্ট করুন
+        </button>
+        <button class="btn-calc-action whatsapp" id="btnShareReceiptWA" style="flex:1;">
+          হোয়াটসঅ্যাপে পাঠান
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================
+     MODAL 2: CASH DENOMINATION COUNTER (নোট গণনা)
+======================================================== -->
+<div class="modal-overlay" id="curPickModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 class="modal-title">🌐 <span data-i18n="pickerTitle">কারেন্সি বেছে নিন</span> <small id="pickCount" style="font-weight:600; color:var(--text-light);"></small></h3>
+      <button class="modal-close-btn" id="btnClosePick">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="search" id="pickSearch" placeholder="🔍 দেশ বা কোড লিখুন (যেমন: বাংলাদেশ, INR, kuwait)" autocomplete="off"
+        style="width:100%; height:44px; border:1.5px solid var(--border-card); border-radius:var(--radius-md); padding:0 12px; font-family:var(--font-bangla); font-weight:600;">
+      <div id="pickChips" style="display:flex; gap:6px; overflow-x:auto; padding:10px 0 8px;"></div>
+      <div id="pickList" style="max-height:52vh; overflow-y:auto; display:flex; flex-direction:column; gap:6px; -webkit-overflow-scrolling:touch;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="denomModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 class="modal-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+          <rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/>
+        </svg>
+        <span data-i18n="denomModalTitle">সৌদি রিয়াল (SAR) নোট কাউন্টার</span>
+      </h3>
+      <button class="modal-close-btn" id="btnCloseDenom">&times;</button>
+    </div>
+
+    <div class="modal-body">
+      <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px; font-weight:600;">
+        কাউন্টারের রিয়ালের নোট সংখ্যা লিখুন:
+      </div>
+
+      <div class="denom-grid" id="denomInputsGrid">
+        <!-- Built dynamically: 500, 200, 100, 50, 20, 10, 5, 1 SAR -->
+      </div>
+
+      <div class="slip-total-box" style="margin-top:12px;">
+        <div>
+          <div style="font-size:0.78rem; font-weight:700; color:var(--text-muted);" data-i18n="denomTotalLabel">মোট ক্যাশ নোট:</div>
+          <div class="slip-total-val" id="denomTotalAmount">০.০০ SAR</div>
+        </div>
+        <button class="btn-secondary" id="btnResetDenom" data-i18n="denomClear">ক্লিয়ার</button>
+      </div>
+
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button class="btn-calc-action receipt-btn" id="btnApplyDenomToCalc" style="flex:1;">
+          <span data-i18n="denomApply">ক্যালকুলেটরে এই টাকা বসান</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================================================
+     MODAL: DAILY CLOSING SUMMARY (Z-REPORT)
+======================================================== -->
+<div class="modal-overlay" id="closingModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 style="margin:0; font-size:1.05rem; display:flex; align-items:center; gap:6px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        দৈনিক ক্যাশ ড্রয়ার ক্লোজিং রিপোর্ট
+      </h3>
+      <button class="modal-close-btn" id="btnCloseClosing">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="receipt-slip" id="closingSlip">
+        <div class="slip-header">
+          <h2 class="slip-biz-name">AL ORIYES EXCHANGE</h2>
+          <div class="slip-tagline">জেদ্দা শাখা · কিংডম অব সৌদি আরব</div>
+          <div style="font-size:0.86rem; font-weight:800; color:var(--brand-800); margin-top:4px; text-transform:uppercase;">
+            দৈনিক হিসাব ক্লোজিং রিপোর্ট (Z-REPORT)
+          </div>
+        </div>
+
+        <div class="slip-meta-row">
+          <span>তারিখ: <b id="closingDate">—</b></span>
+          <span id="closingTime">—</span>
+        </div>
+
+        <hr class="slip-divider">
+
+        <table class="slip-data-table">
+          <tr>
+            <td style="color:var(--text-muted);">মোট এক্সচেঞ্জ ভাউচার:</td>
+            <td id="closingTotalVouchers" style="font-weight:700;">০ টি</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-muted);">মোট লেনদেন ভলিউম:</td>
+            <td id="closingTotalVolume" style="font-weight:700;">০.০০ SAR</td>
+          </tr>
+          <tr style="border-top:1px dashed var(--border-light);">
+            <td style="color:var(--brand-800); font-weight:800;">দোকানের মোট নিট লাভ:</td>
+            <td id="closingTotalProfit" style="font-weight:800; color:var(--brand-800);">+০.০০ SAR</td>
+          </tr>
+        </table>
+
+        <div style="margin-top:10px; border-top:1px solid #000; padding-top:6px;">
+          <div style="font-size:0.75rem; font-weight:800; margin-bottom:4px; text-transform:uppercase;">কারেন্সি ভিত্তিক সারসংক্ষেপ:</div>
+          <div id="closingCurBreakdown" style="font-size:0.75rem; line-height:1.5;"></div>
+        </div>
+
+        <div style="margin-top:24px; padding-top:16px; border-top:1px dashed #999; display:flex; justify-content:space-between; font-size:0.72rem; color:var(--text-muted);">
+          <div>ক্যাশিয়ার স্বাক্ষর: _________</div>
+          <div>ম্যানেজার ভেরিফিকেশন: _________</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" style="display:flex; justify-content:space-between; gap:8px;">
+      <button class="btn-primary" id="btnPrintClosing" style="flex:1;">🖨️ প্রিন্ট করুন (৮০মিমি)</button>
+      <button class="btn-secondary" id="btnDismissClosing" style="flex:0 0 80px;">বন্ধ</button>
+    </div>
+  </div>
+</div>
+
+<!-- SMARTPHONE / DESKTOP AUTOMATIC INSTALL POPUP BANNER -->
+<div id="pwaInstallPopup" style="display:none; position:fixed; bottom:70px; left:12px; right:12px; max-width:440px; margin:0 auto; background:#ffffff; border:1.5px solid var(--brand-500); border-radius:16px; padding:12px 14px; box-shadow:0 12px 36px rgba(0,0,0,0.22); z-index:9999; align-items:center; gap:12px;">
+  <img src="icon-192.png" width="46" height="46" style="border-radius:10px; flex-shrink:0; box-shadow:0 2px 8px rgba(0,0,0,0.12);" alt="App Icon">
+  <div style="flex:1; min-width:0;">
+    <div style="font-weight:800; font-size:0.92rem; color:var(--text-main); line-height:1.2;">Al Oriyes Exchange</div>
+    <div id="pwaPopupDesc" style="font-size:0.75rem; color:var(--text-muted); line-height:1.3; margin-top:2px;">স্মার্টফোনে অফলাইন অ্যাপ হিসেবে ইনস্টল করুন</div>
+  </div>
+  <div style="display:flex; align-items:center; gap:6px;">
+    <button id="btnPwaPopupInstall" class="btn-primary" style="padding:7px 14px; font-size:0.8rem; font-weight:800; border-radius:8px; white-space:nowrap; background:var(--brand-700); cursor:pointer;">
+      ইনস্টল
+    </button>
+    <button id="btnPwaPopupDismiss" style="background:none; border:none; font-size:1.3rem; color:var(--text-light); cursor:pointer; padding:0 4px; line-height:1;" title="বন্ধ">
+      &times;
+    </button>
+  </div>
+</div>
+
+<!-- FLOATING TOAST -->
+<div id="toast">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toastMsg">কপি করা হয়েছে!</span>
+</div>
+
+<!-- ========================================================
+     JAVASCRIPT JEDDAH CASH EXCHANGE LOGIC
+======================================================== -->
+<script>
+/**
+ * Al Oriyes Exchange - Jeddah Cash Counter System (100% Screen Responsive)
+ */
+const CURRENCIES = [
+  ["BDT", "বাংলাদেশ (টাকা)", "৳", 2, "asia", "BD"],
+  ["USD", "মার্কিন ডলার (USD)", "$", 4, "global", "US"],
+  ["INR", "ভারত (রুপি)", "₹", 2, "asia", "IN"],
+  ["PKR", "পাকিস্তান (রুপি)", "Rs", 2, "asia", "PK"],
+  ["EUR", "ইউরোপিয়ান ইউরো", "€", 4, "global", "EU"],
+  ["GBP", "ব্রিটিশ পাউন্ড", "£", 4, "global", "GB"],
+  ["AED", "ইউএই দিরহাম", "د.إ", 3, "mideast", "AE"],
+  ["KWD", "কুয়েতি দিনার", "KD", 4, "mideast", "KW"],
+  ["QAR", "কাতারি রিয়াল", "QR", 3, "mideast", "QA"],
+  ["OMR", "ওমানি রিয়াল", "OMR", 4, "mideast", "OM"],
+  ["BHD", "বাহরাইনি দিনার", "BD", 4, "mideast", "BH"],
+  ["NPR", "নেপাল (রুপি)", "Rs", 2, "asia", "NP"],
+  ["LKR", "শ্রীলঙ্কা (রুপি)", "Rs", 2, "asia", "LK"],
+  ["PHP", "ফিলিপাইন (পেসো)", "₱", 2, "asia", "PH"],
+  ["IDR", "ইন্দোনেশিয়া (রুপিয়া)", "Rp", 0, "asia", "ID"],
+  ["EGP", "মিশর (পাউন্ড)", "E£", 2, "africa", "EG"],
+  ["YER", "ইয়েমেন (রিয়াল)", "﷼", 2, "mideast", "YE"],
+  ["SDG", "সুদান (পাউন্ড)", "SDG", 2, "africa", "SD"],
+  ["ETB", "ইথিওপিয়া (বীর)", "Br", 2, "africa", "ET"],
+  ["ERN", "ইরিত্রিয়া (নাকফা)", "Nfk", 2, "africa", "ER"],
+  ["SOS", "সোমালিয়া (শিলিং)", "Sh", 2, "africa", "SO"],
+  ["KES", "কেনিয়া (শিলিং)", "KSh", 2, "africa", "KE"],
+  ["UGX", "উগান্ডা (শিলিং)", "USh", 0, "africa", "UG"],
+  ["NGN", "নাইজেরিয়া (নায়রা)", "₦", 2, "africa", "NG"],
+  ["GHS", "ঘানা (সেডি)", "GH₵", 2, "africa", "GH"],
+  ["MAD", "মরক্কো (দিরহাম)", "MAD", 2, "africa", "MA"],
+  ["TND", "তিউনিসিয়া (দিনার)", "DT", 3, "africa", "TN"],
+  ["JOD", "জর্ডান (দিনার)", "JD", 3, "mideast", "JO"],
+  ["SYP", "সিরিয়া (পাউন্ড)", "£S", 2, "mideast", "SY"],
+  ["LBP", "লেবানন (পাউন্ড)", "L£", 0, "mideast", "LB"],
+  ["AFN", "আফগানিস্তান (আফগানি)", "؋", 2, "asia", "AF"],
+  ["MMK", "মিয়ানমার (কিয়াট)", "K", 2, "asia", "MM"],
+  ["VND", "ভিয়েতনাম (ডং)", "₫", 0, "asia", "VN"],
+  ["THB", "থাইল্যান্ড (বাত)", "฿", 2, "asia", "TH"],
+  ["MYR", "মালয়েশিয়া (রিংগিত)", "RM", 2, "asia", "MY"],
+  ["TRY", "তুরস্ক (লিরা)", "₺", 2, "mideast", "TR"],
+  ["CAD", "কানাডিয়ান ডলার", "C$", 4, "global", "CA"],
+  ["AUD", "অস্ট্রেলিয়ান ডলার", "A$", 4, "global", "AU"],
+  ["JPY", "জাপানি ইয়েন", "¥", 2, "global", "JP"],
+  ["CNY", "চাইনিজ ইউয়ান", "¥", 2, "asia", "CN"],
+  ["SGD", "সিঙ্গাপুর ডলার", "S$", 4, "asia", "SG"],
+  ["CHF", "সুইজারল্যান্ড (ফ্রাঁ)", "CHF", 4, "global", "CH"],
+  ["SEK", "সুইডেন (ক্রোনা)", "kr", 3, "global", "SE"],
+  ["NOK", "নরওয়ে (ক্রোনে)", "kr", 3, "global", "NO"],
+  ["DKK", "ডেনমার্ক (ক্রোনে)", "kr", 3, "global", "DK"],
+  ["NZD", "নিউজিল্যান্ড ডলার", "NZ$", 4, "global", "NZ"],
+  ["HKD", "হংকং ডলার", "HK$", 3, "asia", "HK"],
+  ["KRW", "দক্ষিণ কোরিয়া (ওন)", "₩", 2, "asia", "KR"],
+  ["RUB", "রাশিয়া (রুবল)", "₽", 2, "global", "RU"],
+  ["ZAR", "দক্ষিণ আফ্রিকা (র‍্যান্ড)", "R", 2, "africa", "ZA"],
+  ["BRL", "ব্রাজিল (রিয়াল)", "R$", 3, "global", "BR"],
+  ["MXN", "মেক্সিকো (পেসো)", "Mex$", 2, "global", "MX"],
+  ["PLN", "পোল্যান্ড (জ্লটি)", "zł", 3, "global", "PL"],
+  ["CZK", "চেক প্রজাতন্ত্র (ক্রোনা)", "Kč", 2, "global", "CZ"],
+  ["HUF", "হাঙ্গেরি (ফোরিন্ট)", "Ft", 2, "global", "HU"],
+  ["RON", "রোমানিয়া (লেউ)", "lei", 3, "global", "RO"],
+  ["UZS", "উজবেকিস্তান (সোম)", "soʻm", 0, "asia", "UZ"],
+  ["KZT", "কাজাখস্তান (তেঙ্গে)", "₸", 2, "asia", "KZ"],
+  ["AZN", "আজারবাইজান (মানাত)", "₼", 4, "asia", "AZ"],
+  ["GEL", "জর্জিয়া (লারি)", "₾", 3, "asia", "GE"],
+  ["IRR", "ইরান (রিয়াল)", "﷼", 0, "mideast", "IR"],
+  ["IQD", "ইরাক (দিনার)", "ع.د", 0, "mideast", "IQ"],
+  ["LYD", "লিবিয়া (দিনার)", "LD", 3, "africa", "LY"],
+  ["DZD", "আলজেরিয়া (দিনার)", "DA", 2, "africa", "DZ"],
+  ["TZS", "তানজানিয়া (শিলিং)", "TSh", 0, "africa", "TZ"],
+  ["ZMW", "জাম্বিয়া (কওয়াচা)", "ZK", 2, "africa", "ZM"],
+  ["XAF", "মধ্য আফ্রিকান ফ্রাঁ (CFA)", "FCFA", 2, "africa", ""],
+  ["XOF", "পশ্চিম আফ্রিকান ফ্রাঁ (CFA)", "CFA", 2, "africa", ""],
+  ["RWF", "রুয়ান্ডা (ফ্রাঁ)", "RF", 0, "africa", "RW"],
+  ["MUR", "মরিশাস (রুপি)", "Rs", 2, "africa", "MU"],
+  ["MZN", "মোজাম্বিক (মেটিকাল)", "MT", 2, "africa", "MZ"],
+  ["KHR", "কম্বোডিয়া (রিয়েল)", "៛", 0, "asia", "KH"],
+  ["LAK", "লাওস (কিপ)", "₭", 0, "asia", "LA"],
+  ["BND", "ব্রুনাই ডলার", "B$", 4, "asia", "BN"],
+  ["MVR", "মালদ্বীপ (রুফিয়া)", "Rf", 2, "asia", "MV"],
+  ["BTN", "ভুটান (গুলট্রাম)", "Nu", 2, "asia", "BT"],
+  ["KGS", "কিরগিজস্তান (সোম)", "с", 2, "asia", "KG"],
+  ["TJS", "তাজিকিস্তান (সোমনি)", "SM", 2, "asia", "TJ"],
+  ["DJF", "জিবুতি (ফ্রাঁ)", "Fdj", 0, "africa", "DJ"],
+  ["GMD", "গাম্বিয়া (দালাসি)", "D", 2, "africa", "GM"],
+  ["MRU", "মৌরিতানিয়া (ওগুইয়া)", "UM", 2, "africa", "MR"]
+];
+
+const FALLBACK_RATES = {
+  BDT: 33.19, USD: 0.2666, EUR: 0.2450, GBP: 0.2090, AED: 0.979, KWD: 0.0818, QAR: 0.971,
+  OMR: 0.1026, BHD: 0.1005, INR: 23.45, PKR: 74.30, NPR: 37.55, LKR: 80.20, PHP: 15.42,
+  IDR: 4380, EGP: 13.10, YER: 66.5, SDG: 160, ETB: 32.5, ERN: 4.0, SOS: 152.0,
+  KES: 34.40, UGX: 980, NGN: 415, GHS: 4.25, MAD: 2.65, TND: 0.82, JOD: 0.189,
+  SYP: 3450, LBP: 23900, AFN: 18.5, MMK: 560, VND: 6920, THB: 8.65, MYR: 1.18,
+  TRY: 9.20, CAD: 0.362, AUD: 0.405, JPY: 40.5, CNY: 1.91, SGD: 0.355,
+  CHF: 0.2133, SEK: 2.56, NOK: 2.72, DKK: 1.71, NZD: 0.453, HKD: 2.08, KRW: 373, RUB: 22.7, ZAR: 4.8, BRL: 1.47, MXN: 5.07, PLN: 0.99, CZK: 5.87, HUF: 96, RON: 1.2, UZS: 3333, KZT: 139, AZN: 0.453, GEL: 0.72, IRR: 11200, IQD: 349, LYD: 1.44, DZD: 34.7, TZS: 667, ZMW: 6.67, XAF: 160, XOF: 160, RWF: 373, MUR: 12, MZN: 17, KHR: 1067, LAK: 5733, BND: 0.347, MVR: 4.11, BTN: 22.7, KGS: 23.2, TJS: 2.53, DJF: 47.4, GMD: 18.7, MRU: 10.7
+};
+
+const DENOM_UNITS = [500, 200, 100, 50, 10, 5, 2, 1]; // সৌদি নোট/কয়েন (২০ রিয়ালের নোট নেই)
+const CASH_RATE_WARN = ["LBP", "SYP", "YER", "SDG", "SOS", "ERN", "MMK", "NGN", "ETB", "AFN", "IRR", "LYD", "DZD"];
+const esc = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad = (n, l = 2) => String(n).padStart(l, "0");
+const dayKey = (d) => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+const entryDay = (it) => it.day || dayKey(new Date(it.id));
+let regionNames = null;
+try { regionNames = new Intl.DisplayNames(["en"], { type: "region" }); } catch (e) {}
+const TOP_MATRIX_CURRENCIES = ["BDT", "INR", "PKR", "NPR", "PHP", "EGP", "USD", "AED"];
+
+let state = {
+  lang: (function() {
+    try { return localStorage.getItem("al_oriyes_lang") || "bn"; } catch (e) { return "bn"; }
+  })(),
+  rates: {},
+  lastUpdated: "",
+  source: "",
+  isLive: false,
+  selectedCurIndex: 0,
+  calcMode: "buy", // "buy": Customer gives Foreign Cash -> Shop pays SAR
+  searchQuery: "",
+  activeRegion: "all",
+  soundEnabled: true,
+  largeFont: false,
+  countdownSeconds: 1800,
+  config: {
+    margin: 1.0,
+    overrides: {},
+    overrideBuy: {},
+    overrideSell: {},
+    favorites: ["BDT", "USD", "INR", "PKR", "EUR", "AED"]
+  },
+  ledger: []
+};
+
+// Storage
+try {
+  const savedCfg = localStorage.getItem("al_oriyes_config");
+  if (savedCfg) Object.assign(state.config, JSON.parse(savedCfg));
+  // পুরনো একক কাস্টম রেট → ক্রয়/বিক্রয় দুই জায়গায় কপি
+  if (state.config.overrides && Object.keys(state.config.overrides).length) {
+    Object.keys(state.config.overrides).forEach(k => {
+      if (!state.config.overrideBuy[k]) state.config.overrideBuy[k] = state.config.overrides[k];
+      if (!state.config.overrideSell[k]) state.config.overrideSell[k] = state.config.overrides[k];
+    });
+    state.config.overrides = {};
+  }
+  
+  const savedLedger = localStorage.getItem("al_oriyes_ledger");
+  if (savedLedger) state.ledger = JSON.parse(savedLedger);
+  
+  if (localStorage.getItem("al_oriyes_large_font") === "true") {
+    state.largeFont = true;
+    document.body.classList.add("font-large");
+  }
+} catch (e) {}
+
+function saveConfig() {
+  try { localStorage.setItem("al_oriyes_config", JSON.stringify(state.config)); } catch (e) {}
+}
+
+let storageOK = true;
+try { localStorage.setItem("al_oriyes_test", "1"); localStorage.removeItem("al_oriyes_test"); } catch (e) { storageOK = false; }
+
+function saveLedger() {
+  try { localStorage.setItem("al_oriyes_ledger", JSON.stringify(state.ledger)); } catch (e) {}
+}
+
+
+/* ========================================================
+   BILINGUAL I18N ENGINE (BANGLA DEFAULT / ENGLISH TOGGLE)
+======================================================== */
+const I18N = {
+  bn: {
+    siteTitle: "Al Oriyes Exchange – জেদ্দা ক্যাশ কারেন্সি কাউন্টার",
+    headerTitle: "Al Oriyes Exchange",
+    headerSubtitleDefault: "জেদ্দা ক্যাশ কাউন্টার",
+    headerRateLoading: "আজকের রেট লোড হচ্ছে…",
+    headerRateLive: "আজকের রেট সক্রিয়",
+    headerRateCached: "সেভ করা আজকের রেট",
+    headerRateOffline: "📡 অফলাইন মোড (ওয়াইফাই বন্ধ)",
+    offlineBannerText: "ইন্টারনেট সংযোগ নেই (অফলাইন মোড)। আপনার সেভ করা রেটে ক্যাশ কাউন্টার ও হিসাব খাতা সম্পূর্ণ স্বাভাবিকভাবে সচল রয়েছে।",
+    langActiveToast: "বাংলা ভাষা সক্রিয় করা হয়েছে",
+    btnInstallPWA: "📲 ইনস্টল",
+    countdownTitle: "পরবর্তী অটো-চেক (রেট দিনে একবার আপডেট হয়)",
+    btnExportCSV: "📥 CSV",
+    
+    // Calculator
+    calcHeaderTitle: "ক্যাশ মানি এক্সচেঞ্জ",
+    tabBuy: "ক্রয় (Buy)",
+    tabSell: "বিক্রয় (Sell)",
+    tabBuySub: "{cur} এনেছে ➔ SAR দেব",
+    tabSellSub: "SAR এনেছে ➔ {cur} দেব",
+    calcInputBuyLabel: "কাস্টমার কত ক্যাশ ({cur}) দিচ্ছে?",
+    calcInputSellLabel: "কাস্টমার কত রিয়াল (SAR) দিচ্ছে?",
+    quickChipsLabel: "দ্রুত টাকার পরিমাণ:",
+    payoutSARLabel: "কাস্টমার ক্যাশ পাবে (সৌদি রিয়াল):",
+    payoutForeignLabel: "কাস্টমারকে ক্যাশ দিতে হবে ({cur}):",
+    marketLabel: "মার্কেট:",
+    profitLabel: "লাভ:",
+    lossLabel: "⚠ লস:",
+    rateUnavailable: "রেট অনুপলব্ধ",
+    btnChangeCur: "কারেন্সি বদলান",
+    btnWAQuote: "হোয়াটসঅ্যাপ",
+    btnReceipt: "ক্যাশ ভাউচার",
+    btnSaveLedger: "আজকের হিসাব খাতায় সেভ করুন",
+    
+    // Custom rate & Margin
+    customRateSummary: "⚙️ নিজের কাস্টম রেট ও মার্জিন সেটিং",
+    customRateTitle: "এই কারেন্সির জন্য সরাসরি রেট সেট করুন",
+    customRateHelpStrong: "১ {cur} = কত SAR দিতে/নিতে চান? (যেমন: {val})",
+    customRateHelpNormal: "১ SAR = কত {cur} দিতে/নিতে চান?",
+    customRateSave: "সেভ",
+    customRateReset: "রিসেট",
+    marginLabel: "দোকানের লাভ মার্জিন (%):",
+    
+    // Ledger
+    ledgerTitle: "জেদ্দা কাউন্টার হিসাব খাতা",
+    statTotalTrans: "মোট কাস্টমার",
+    statTotalVolume: "মোট রিয়াল লেনদেন",
+    statTotalProfit: "দোকানের মোট লাভ",
+    ledgerClosingBtn: "📊 ক্লোজিং স্লিপ",
+    ledgerBackupBtn: "💾 ব্যাকআপ",
+    ledgerRestoreBtn: "📂 রিস্টোর",
+    ledgerClearBtn: "খালি করুন",
+    thTime: "সময়",
+    thType: "ধরন",
+    thInward: "জমা",
+    thPayout: "পরিশোধ",
+    thProfit: "লাভ",
+    thDelete: "মুছুন",
+    ledgerEmpty: "আজকের কোনো লেনদেন এখনো খাতাভুক্ত করা হয়নি।",
+    ledgerClearConfirm: "আজকের সমস্ত লেনদেন মুছে ফেলতে চান? (পুরনো দিনের হিসাব থেকে যাবে)",
+    
+    // Board
+    boardTitle: "জেদ্দা কাউন্টার রেট বোর্ড",
+    thCountryCur: "দেশ ও কারেন্সি",
+    thMarketRate: "মার্কেট রেট",
+    thOurOffer: "আমাদের অফার",
+    
+    // Receipt Modal
+    receiptModalTitle: "ক্যাশ মানি এক্সচেঞ্জ ভাউচার",
+    custNameLabel: "কাস্টমারের নাম:",
+    custNamePlaceholder: "ঐচ্ছিক",
+    custPhoneLabel: "মোবাইল নং:",
+    slipTagline: "ক্যাশ ফরেন কারেন্সি এক্সচেঞ্জ কাউন্টার",
+    slipLocation: "জেদ্দা শাখা · কিংডম অব সৌদি আরব (Jeddah, KSA)",
+    slipVoucherLabel: "ভাউচার:",
+    slipCustLabel: "কাস্টমার:",
+    slipTransTypeLabel: "লেনদেনের ধরন:",
+    slipInwardLabel: "কাস্টমার জমা দিয়েছে:",
+    slipRateLabel: "এক্সচেঞ্জ রেট:",
+    slipPayoutSARLabel: "কাস্টমারকে প্রদেয় ক্যাশ:",
+    slipPayoutForeignLabel: "কাস্টমার পাবে ({cur}):",
+    btnPrintReceipt: "🖨️ প্রিন্ট করুন (৮০মিমি)",
+    btnShareWA: "হোয়াটসঅ্যাপে পাঠান",
+    
+    // Closing Modal
+    closingModalTitle: "দৈনিক ক্যাশ ড্রয়ার ক্লোজিং রিপোর্ট",
+    closingReportSubtitle: "দৈনিক হিসাব ক্লোজিং রিপোর্ট (Z-REPORT)",
+    closingDateLabel: "তারিখ:",
+    closingTotalVouchersLabel: "মোট এক্সচেঞ্জ ভাউচার:",
+    closingTotalVolumeLabel: "মোট লেনদেন ভলিউম:",
+    closingTotalProfitLabel: "দোকানের মোট নিট লাভ:",
+    closingCurSummaryLabel: "কারেন্সি ভিত্তিক সারসংক্ষেপ:",
+    closingCashierSign: "ক্যাশিয়ার স্বাক্ষর: _________",
+    closingManagerSign: "ম্যানেজার ভেরিফিকেশন: _________",
+    btnPrintClosing: "🖨️ প্রিন্ট করুন (৮০মিমি)",
+    btnDismiss: "বন্ধ",
+    
+    // Denomination Modal
+    denomModalTitle: "সৌদি ক্যাশ নোট কাউন্টার",
+    denomTotalLabel: "মোট ক্যাশ নোট:",
+    denomClear: "ক্লিয়ার",
+    denomApply: "ক্যালকুলেটরে এই টাকা বসান",
+    
+    // Currency Picker Modal
+    pickerTitle: "কারেন্সি বেছে নিন",
+    pickerSearchPlaceholder: "কারেন্সির নাম বা কোড খুঁজুন (যেমন: BDT, Dollar, টাকা)...",
+    regAll: "সব",
+    regFav: "★ ফেভারিট",
+    regMideast: "মধ্যপ্রাচ্য",
+    regAsia: "এশিয়া",
+    regAfrica: "আফ্রিকা",
+    regGlobal: "বিশ্ব",
+    pickerNotFound: "কোনো কারেন্সি পাওয়া যায়নি",
+
+    // Dock
+    dockCounter: "কাউন্টার",
+    dockCurrencies: "কারেন্সি",
+    dockNotes: "নোট গণনা",
+    dockReceipt: "ক্যাশ ভাউচার",
+    dockLedger: "হিসাব খাতা"
+  },
+  en: {
+    siteTitle: "Al Oriyes Exchange – Jeddah Cash Currency Counter",
+    headerTitle: "Al Oriyes Exchange",
+    headerSubtitleDefault: "Jeddah Cash Counter",
+    headerRateLoading: "Loading rates…",
+    headerRateLive: "Live Rates Active",
+    headerRateCached: "Saved Today's Rates",
+    headerRateOffline: "📡 Offline Mode (Wi-Fi Off)",
+    offlineBannerText: "No internet connection (Offline Mode). Counter & transaction ledger are fully active with cached rates.",
+    langActiveToast: "English language enabled",
+    btnInstallPWA: "📲 Install",
+    countdownTitle: "Next auto-check (Rates update once daily)",
+    btnExportCSV: "📥 CSV",
+    
+    // Calculator
+    calcHeaderTitle: "Cash Currency Exchange",
+    tabBuy: "Buy",
+    tabSell: "Sell",
+    tabBuySub: "Gives {cur} ➔ Shop pays SAR",
+    tabSellSub: "Gives SAR ➔ Shop pays {cur}",
+    calcInputBuyLabel: "How much cash ({cur}) is customer giving?",
+    calcInputSellLabel: "How much SAR is customer giving?",
+    quickChipsLabel: "Quick Amounts:",
+    payoutSARLabel: "Customer Receives (Saudi Riyal):",
+    payoutForeignLabel: "Payout to Customer ({cur}):",
+    marketLabel: "Market:",
+    profitLabel: "Profit:",
+    lossLabel: "⚠ Loss:",
+    rateUnavailable: "Rate Unavailable",
+    btnChangeCur: "Change Currency",
+    btnWAQuote: "WhatsApp",
+    btnReceipt: "Cash Voucher",
+    btnSaveLedger: "Save to Today's Ledger",
+    
+    // Custom rate & Margin
+    customRateSummary: "⚙️ Custom Rate & Margin Settings",
+    customRateTitle: "Set direct custom rate for this currency",
+    customRateHelpStrong: "1 {cur} = How much SAR to buy/sell? (e.g. {val})",
+    customRateHelpNormal: "1 SAR = How much {cur} to buy/sell?",
+    customRateSave: "Save",
+    customRateReset: "Reset",
+    marginLabel: "Shop Profit Margin (%):",
+    
+    // Ledger
+    ledgerTitle: "Jeddah Counter Transaction Ledger",
+    statTotalTrans: "Total Customers",
+    statTotalVolume: "Total SAR Volume",
+    statTotalProfit: "Shop Total Profit",
+    ledgerClosingBtn: "📊 Closing Slip",
+    ledgerBackupBtn: "💾 Backup",
+    ledgerRestoreBtn: "📂 Restore",
+    ledgerClearBtn: "Clear Today",
+    thTime: "Time",
+    thType: "Type",
+    thInward: "Inward",
+    thPayout: "Payout",
+    thProfit: "Profit",
+    thDelete: "Delete",
+    ledgerEmpty: "No transactions recorded yet today.",
+    ledgerClearConfirm: "Clear today's transactions? (Past days will remain intact)",
+    
+    // Board
+    boardTitle: "Jeddah Counter Rate Board",
+    thCountryCur: "Country & Currency",
+    thMarketRate: "Market Rate",
+    thOurOffer: "Our Offer",
+    
+    // Receipt Modal
+    receiptModalTitle: "Cash Exchange Receipt Voucher",
+    custNameLabel: "Customer Name:",
+    custNamePlaceholder: "Optional",
+    custPhoneLabel: "Mobile No:",
+    slipTagline: "Cash Foreign Currency Exchange Counter",
+    slipLocation: "Jeddah Branch · Kingdom of Saudi Arabia (KSA)",
+    slipVoucherLabel: "Voucher:",
+    slipCustLabel: "Customer:",
+    slipTransTypeLabel: "Transaction Type:",
+    slipInwardLabel: "Customer Paid In:",
+    slipRateLabel: "Exchange Rate:",
+    slipPayoutSARLabel: "Cash Payout to Customer:",
+    slipPayoutForeignLabel: "Customer Receives ({cur}):",
+    btnPrintReceipt: "🖨️ Print (80mm)",
+    btnShareWA: "Share WA",
+    
+    // Closing Modal
+    closingModalTitle: "Daily Cash Drawer Closing Report",
+    closingReportSubtitle: "DAILY CLOSING REPORT (Z-REPORT)",
+    closingDateLabel: "Date:",
+    closingTotalVouchersLabel: "Total Exchange Vouchers:",
+    closingTotalVolumeLabel: "Total Transaction Volume:",
+    closingTotalProfitLabel: "Shop Total Net Profit:",
+    closingCurSummaryLabel: "Currency Breakdown Summary:",
+    closingCashierSign: "Cashier Signature: _________",
+    closingManagerSign: "Manager Verification: _________",
+    btnPrintClosing: "🖨️ Print (80mm)",
+    btnDismiss: "Close",
+    
+    // Denomination Modal
+    denomModalTitle: "Saudi Riyal Denomination Counter",
+    denomTotalLabel: "Total Cash Notes:",
+    denomClear: "Clear",
+    denomApply: "Apply to Calculator",
+    
+    // Currency Picker Modal
+    pickerTitle: "Select Currency",
+    pickerSearchPlaceholder: "Search currency name or code (e.g. BDT, USD, Dollar)...",
+    regAll: "All",
+    regFav: "★ Favorites",
+    regMideast: "Middle East",
+    regAsia: "Asia",
+    regAfrica: "Africa",
+    regGlobal: "Global",
+    pickerNotFound: "No currency found",
+
+    // Dock
+    dockCounter: "Counter",
+    dockCurrencies: "Currencies",
+    dockNotes: "Note Counter",
+    dockReceipt: "Receipt",
+    dockLedger: "Ledger"
+  }
+};
+
+const CURRENCY_NAMES_EN = {
+  BDT: "Bangladesh (Taka)", USD: "US Dollar", INR: "India (Rupee)", PKR: "Pakistan (Rupee)",
+  EUR: "Euro", GBP: "British Pound", AED: "UAE Dirham", KWD: "Kuwaiti Dinar",
+  QAR: "Qatari Riyal", OMR: "Omani Rial", BHD: "Bahraini Dinar", NPR: "Nepal (Rupee)",
+  LKR: "Sri Lanka (Rupee)", PHP: "Philippines (Peso)", IDR: "Indonesia (Rupiah)", EGP: "Egypt (Pound)",
+  YER: "Yemen (Rial)", SDG: "Sudan (Pound)", ETB: "Ethiopia (Birr)", ERN: "Eritrea (Nakfa)",
+  SOS: "Somalia (Shilling)", KES: "Kenya (Shilling)", UGX: "Uganda (Shilling)", NGN: "Nigeria (Naira)",
+  GHS: "Ghana (Cedi)", MAD: "Morocco (Dirham)", TND: "Tunisia (Dinar)", JOD: "Jordan (Dinar)",
+  SYP: "Syria (Pound)", LBP: "Lebanon (Pound)", AFN: "Afghanistan (Afghani)", MMK: "Myanmar (Kyat)",
+  VND: "Vietnam (Dong)", THB: "Thailand (Baht)", MYR: "Malaysia (Ringgit)", TRY: "Turkey (Lira)",
+  CAD: "Canadian Dollar", AUD: "Australian Dollar", JPY: "Japanese Yen", CNY: "Chinese Yuan",
+  SGD: "Singapore Dollar", CHF: "Swiss Franc", SEK: "Sweden (Krona)", NOK: "Norway (Krone)",
+  DKK: "Denmark (Krone)", NZD: "New Zealand Dollar", HKD: "Hong Kong Dollar", KRW: "South Korea (Won)",
+  RUB: "Russia (Ruble)", ZAR: "South Africa (Rand)", BRL: "Brazil (Real)", MXN: "Mexico (Peso)",
+  PLN: "Poland (Zloty)", CZK: "Czech Republic (Koruna)", HUF: "Hungary (Forint)", RON: "Romania (Leu)",
+  UZS: "Uzbekistan (Som)", KZT: "Kazakhstan (Tenge)", AZN: "Azerbaijan (Manat)", GEL: "Georgia (Lari)",
+  IRR: "Iran (Rial)", IQD: "Iraq (Dinar)", LYD: "Libya (Dinar)", DZD: "Algeria (Dinar)",
+  TZS: "Tanzania (Shilling)", ZMW: "Zambia (Kwacha)", XAF: "Central African CFA", XOF: "West African CFA",
+  RWF: "Rwanda (Franc)", MUR: "Mauritius (Rupee)", MZN: "Mozambique (Metical)", KHR: "Cambodia (Riel)",
+  LAK: "Laos (Kip)", BND: "Brunei Dollar", MVR: "Maldives (Rufiyaa)", BTN: "Bhutan (Ngultrum)",
+  KGS: "Kyrgyzstan (Som)", TJS: "Tajikistan (Somoni)", DJF: "Djibouti (Franc)", GMD: "Gambia (Dalasi)",
+  MRU: "Mauritania (Ouguiya)"
+};
+
+function t(key, vars = {}) {
+  const lang = (state && state.lang) ? state.lang : "bn";
+  let str = (I18N[lang] && I18N[lang][key]) ? I18N[lang][key] : ((I18N.bn && I18N.bn[key]) ? I18N.bn[key] : key);
+  for (const [k, v] of Object.entries(vars)) {
+    str = str.replace(new RegExp(`\\{${k}\\}`, "g"), v);
+  }
+  return str;
+}
+
+function getCurName(cur) {
+  if (state.lang === "en" && CURRENCY_NAMES_EN[cur[0]]) {
+    return CURRENCY_NAMES_EN[cur[0]];
+  }
+  return cur[1];
+}
+
+function applyTranslations() {
+  const lang = (state && state.lang) ? state.lang : "bn";
+  const dict = I18N[lang] || I18N.bn;
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (dict[key]) {
+      if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+        el.placeholder = dict[key];
+      } else {
+        el.textContent = dict[key];
+      }
+    }
+  });
+
+  const langBtn = document.getElementById("langBtnText");
+  if (langBtn) {
+    langBtn.textContent = lang === "bn" ? "বাং / EN" : "EN / বাং";
+  }
+
+  const pickSearch = document.getElementById("pickSearch");
+  if (pickSearch) pickSearch.placeholder = t("pickerSearchPlaceholder");
+
+  document.documentElement.lang = lang;
+}
+
+function toggleLanguage() {
+  state.lang = state.lang === "bn" ? "en" : "bn";
+  try { localStorage.setItem("al_oriyes_lang", state.lang); } catch (e) {}
+  applyTranslations();
+  renderApp();
+  playSound("click");
+  showToast(t("langActiveToast"));
+}
+
+function getFlagEmoji(countryCode) {
+  if (!countryCode || countryCode.length !== 2) return "🌐";
+  return String.fromCodePoint(...countryCode.toUpperCase().split("").map(c => 127397 + c.charCodeAt(0)));
+}
+
+function formatNumber(val, decimals = 2) {
+  if (val === null || val === undefined || isNaN(val)) return "0.00";
+  return Number(val).toLocaleString("en-US", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+}
+
+// Sound
+let audioCtx = null;
+function playSound(type = "click") {
+  if (!state.soundEnabled) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    if (type === "click") {
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.05);
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.05);
+    } else if (type === "success") {
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(520, audioCtx.currentTime);
+      osc.frequency.setValueAtTime(780, audioCtx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.22);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.22);
+    }
+  } catch (e) {}
+}
+
+let toastTimer = null;
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  document.getElementById("toastMsg").textContent = msg;
+  toast.classList.add("show");
+  playSound("success");
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 2400);
+}
+
+function getMarketRate(curItem) {
+  const code = curItem[0];
+  const rate = state.rates[code];
+  return rate && rate > 0 ? rate : null;
+}
+
+function getOverride(code) {
+  const map = state.calcMode === "buy" ? state.config.overrideBuy : state.config.overrideSell;
+  const v = map[code];
+  return v && v > 0 ? v : 0;
+}
+
+function getCustomerOfferRate(curItem) {
+  const code = curItem[0];
+  const custom = getOverride(code);
+  if (custom && custom > 0) return custom;
+  
+  const mkt = getMarketRate(curItem);
+  if (!mkt) return null;
+  
+  const marginPct = (state.config.margin || 0) / 100;
+  if (state.calcMode === "buy") {
+    return mkt * (1 + marginPct); // Shop buys foreign cash
+  } else {
+    return mkt * (1 - marginPct); // Shop sells foreign cash
+  }
+}
+
+/* ========================================================
+   TRIPLE-ENGINE LIVE API RESILIENT LOADER
+======================================================== */
+function fetchT(url, opts = {}) {
+  const c = new AbortController();
+  const t = setTimeout(() => c.abort(), 8000);
+  return fetch(url, Object.assign({}, opts, { signal: c.signal })).finally(() => clearTimeout(t));
+}
+
+async function fetchRates(force = false) {
+  // ১. যদি ওয়াইফাই বা ইন্টারনেট বন্ধ থাকে, সরাসরি অফলাইন ক্যাশ/ব্যাকআপ চালু হবে
+  if (typeof navigator !== "undefined" && !navigator.onLine) {
+    state.isLive = false;
+    let cached = null;
+    try { cached = JSON.parse(localStorage.getItem("al_oriyes_cached_rates")); } catch (e) {}
+    if (cached && cached.rates) {
+      state.rates = cached.rates;
+      state.lastUpdated = cached.ts;
+      state.source = "অফলাইন ক্যাশ";
+      state.cacheAt = cached.at || 0;
+    } else if (!state.rates || Object.keys(state.rates).length === 0) {
+      state.rates = FALLBACK_RATES;
+      state.lastUpdated = "বিল্ট-ইন ব্যাকআপ রেট";
+      state.source = "অফলাইন রেফারেন্স";
+    }
+    const btn = document.getElementById("btnRefresh");
+    if (btn) btn.classList.remove("spinning");
+    const engineEl = document.getElementById("apiEngineBadge");
+    if (engineEl) engineEl.textContent = "অফলাইন মোড";
+    updateStatusUI();
+    renderApp();
+    return;
+  }
+
+  // রেট দিনে একবার আপডেট হয় (API-র নিয়ম), তাই বারবার কল করা হয় না
+  if (!state.fetchedAt && !force) {
+    try {
+      const c = JSON.parse(localStorage.getItem("al_oriyes_cached_rates"));
+      if (c && c.rates && c.at && Date.now() - c.at < 3600000) {
+        state.rates = c.rates; state.lastUpdated = c.ts; state.source = c.src;
+        state.fetchedAt = c.at; state.isLive = true; state.countdownSeconds = 1800;
+        document.getElementById("apiEngineBadge").textContent = "সেভ করা আজকের রেট";
+        updateStatusUI(); renderApp(); return;
+      }
+    } catch (e) {}
+  }
+  if (state.isLive && state.fetchedAt && Date.now() - state.fetchedAt < (force ? 300000 : 3600000)) {
+    if (force) showToast("রেট দিনে একবার আপডেট হয়, একটু পরে চেষ্টা করুন");
+    state.countdownSeconds = 1800;
+    return;
+  }
+  const btn = document.getElementById("btnRefresh");
+  const liveDot = document.getElementById("liveDot");
+  const statusEl = document.getElementById("headerStatus");
+  const engineEl = document.getElementById("apiEngineBadge");
+  
+  btn.classList.add("spinning");
+  statusEl.textContent = "রেট লোড হচ্ছে…";
+  
+  let success = false;
+  
+  try {
+    const res = await fetchT("https://open.er-api.com/v6/latest/SAR", { cache: "no-store" });
+    const data = await res.json();
+    if (data && data.result === "success" && data.rates) {
+      state.rates = data.rates;
+      state.lastUpdated = data.time_last_update_utc;
+      state.source = "Open ER-API (আজকের)";
+      engineEl.textContent = "Open ER-API";
+      success = true;
+    }
+  } catch (err) {}
+  
+  if (!success) {
+    try {
+      const res = await fetchT("https://api.exchangerate-api.com/v4/latest/SAR");
+      const data = await res.json();
+      if (data && data.rates) {
+        state.rates = data.rates;
+        state.lastUpdated = data.date || new Date().toISOString();
+        state.source = "ExchangeRate-API (আজকের)";
+        engineEl.textContent = "ExchangeRate-API";
+        success = true;
+      }
+    } catch (err) {}
+  }
+  
+  if (!success) {
+    try {
+      const res = await fetchT("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/sar.json");
+      const data2 = await res.json();
+      if (data2 && data2.sar) {
+        const normalized = {};
+        for (const [k, v] of Object.entries(data2.sar)) {
+          normalized[k.toUpperCase()] = v;
+        }
+        state.rates = normalized;
+        state.lastUpdated = data2.date || new Date().toISOString();
+        state.source = "FawazAhmed CDN (আজকের)";
+        engineEl.textContent = "Fawaz CDN";
+        success = true;
+      }
+    } catch (err2) {}
+  }
+  
+  if (!success) {
+    try { // Fawaz CDN-এর Cloudflare মিরর (ডকুমেন্টেশনের প্রস্তাবিত ফলব্যাক)
+      const res = await fetchT("https://latest.currency-api.pages.dev/v1/currencies/sar.json", { cache: "no-store" });
+      const data3 = await res.json();
+      if (data3 && data3.sar) {
+        const norm = {};
+        for (const [k, v] of Object.entries(data3.sar)) norm[k.toUpperCase()] = v;
+        state.rates = norm;
+        state.lastUpdated = data3.date || new Date().toISOString();
+        state.source = "FawazAhmed Mirror (আজকের)";
+        engineEl.textContent = "Fawaz Mirror";
+        success = true;
+      }
+    } catch (err3) {}
+  }
+
+  if (success) {
+    state.isLive = true;
+    state.fetchedAt = Date.now();
+    state.countdownSeconds = 1800;
+    try {
+      localStorage.setItem("al_oriyes_cached_rates", JSON.stringify({
+        rates: state.rates,
+        ts: state.lastUpdated,
+        src: state.source,
+        at: Date.now()
+      }));
+    } catch (e) {}
+  } else {
+    state.isLive = false;
+    try {
+      const cached = JSON.parse(localStorage.getItem("al_oriyes_cached_rates"));
+      if (cached && cached.rates) {
+        state.rates = cached.rates;
+        state.lastUpdated = cached.ts;
+        state.source = cached.src + " (অফলাইন ক্যাশ)";
+        state.cacheAt = cached.at || 0;
+        engineEl.textContent = "অফলাইন ক্যাশ";
+      }
+    } catch (e) {}
+    
+    if (!state.rates || Object.keys(state.rates).length === 0) {
+      state.rates = FALLBACK_RATES;
+      state.lastUpdated = "বিল্ট-ইন ব্যাকআপ রেট";
+      state.source = "অফলাইন রেফারেন্স রেট";
+      engineEl.textContent = "বিল্ট-ইন ব্যাকআপ";
+    }
+  }
+  
+  btn.classList.remove("spinning");
+  updateStatusUI();
+  renderApp();
+}
+
+function updateStatusUI() {
+  const liveDot = document.getElementById("liveDot");
+  const statusEl = document.getElementById("headerStatus");
+  const timeEl = document.getElementById("lastUpdatedTime");
+  const offlineBanner = document.getElementById("offlineBanner");
+  
+  const isOffline = typeof navigator !== "undefined" && !navigator.onLine;
+
+  if (isOffline) {
+    liveDot.style.background = "#ef4444";
+    statusEl.textContent = "📡 অফলাইন মোড (ওয়াইফাই বন্ধ)";
+    if (offlineBanner) offlineBanner.style.display = "flex";
+  } else if (state.isLive) {
+    liveDot.style.background = "var(--brand-500)";
+    statusEl.textContent = "আজকের রেট সক্রিয়";
+    if (offlineBanner) offlineBanner.style.display = "none";
+  } else {
+    liveDot.style.background = "#f59e0b";
+    let age = "";
+    if (state.cacheAt) {
+      const h = Math.floor((Date.now() - state.cacheAt) / 3600000);
+      age = h >= 1 ? ` (${h} ঘণ্টা আগের)` : "";
+    } else {
+      age = " (বিল্ট-ইন পুরনো রেট)";
+    }
+    statusEl.textContent = "⚠ অফলাইন রেট" + age + " — রেট মিলিয়ে নিন";
+  }
+  
+  let formattedDate = state.lastUpdated;
+  try {
+    const raw = String(state.lastUpdated || "");
+    const d = new Date(raw);
+    if (raw && !isNaN(d)) {
+      const dateOnly = /^\d{4}-\d{2}-\d{2}$/.test(raw.trim()); // API gave only a date, no time
+      const dateStr = d.toLocaleDateString("bn-BD", { day: '2-digit', month: 'short', year: 'numeric', timeZone: dateOnly ? 'UTC' : undefined });
+      if (dateOnly) {
+        formattedDate = dateStr;
+      } else {
+        const timeStr = d.toLocaleTimeString("bn-BD", { hour: '2-digit', minute: '2-digit' });
+        formattedDate = dateStr + ", " + timeStr;
+      }
+    }
+  } catch (e) {}
+  
+  timeEl.textContent = formattedDate ? "আপডেট: " + formattedDate : "";
+}
+
+/* ========================================================
+   RENDER: CURRENCY SELECTOR GRID
+======================================================== */
+function renderCurrenciesGrid() {
+  const grid = document.getElementById("currenciesGrid");
+  if (!grid) return;
+  const q = (state.searchQuery || "").trim().toLowerCase();
+  
+  const filtered = CURRENCIES.filter((cur) => {
+    const code = cur[0].toLowerCase();
+    const name = cur[1].toLowerCase();
+    const region = cur[4];
+    const isFav = state.config.favorites.includes(cur[0]);
+    
+    if (state.activeRegion === "fav" && !isFav) return false;
+    if (state.activeRegion !== "all" && state.activeRegion !== "fav" && region !== state.activeRegion) return false;
+    
+    if (q) {
+      let en = "";
+      try { en = regionNames ? (regionNames.of(cur[5]) || "").toLowerCase() : ""; } catch (e) {}
+      return code.includes(q) || name.includes(q) || en.includes(q);
+    }
+    return true;
+  });
+  
+  grid.innerHTML = filtered.map(cur => {
+    const originalIndex = CURRENCIES.findIndex(c => c[0] === cur[0]);
+    const isSelected = originalIndex === state.selectedCurIndex;
+    const isPinned = state.config.favorites.includes(cur[0]);
+    const flag = getFlagEmoji(cur[5]);
+    
+    return `
+      <div class="currency-card-btn ${isSelected ? 'active' : ''} ${isPinned ? 'pinned' : ''}" data-index="${originalIndex}">
+        <button class="btn-pin" title="${isPinned ? 'আনপিন করুন' : 'ফেভারিট পিন করুন'}" data-code="${cur[0]}">
+          ${isPinned ? '★' : '☆'}
+        </button>
+        <span class="btn-flag">${flag}</span>
+        <span class="btn-cname">${cur[1].split(" ")[0]}</span>
+        <span class="btn-code">${cur[0]}</span>
+      </div>
+    `;
+  }).join("");
+  
+  grid.querySelectorAll(".currency-card-btn").forEach(card => {
+    card.addEventListener("click", (e) => {
+      if (e.target.closest(".btn-pin")) return;
+      const idx = parseInt(card.dataset.index, 10);
+      selectCurrency(idx);
+    });
+  });
+  
+  grid.querySelectorAll(".btn-pin").forEach(pinBtn => {
+    pinBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const code = pinBtn.dataset.code;
+      toggleFavorite(code);
+    });
+  });
+}
+
+function toggleFavorite(code) {
+  const favs = state.config.favorites;
+  const idx = favs.indexOf(code);
+  if (idx > -1) {
+    favs.splice(idx, 1);
+    showToast(`${code} আনপিন করা হয়েছে`);
+  } else {
+    favs.push(code);
+    showToast(`${code} ফেভারিটে পিন করা হয়েছে`);
+  }
+  saveConfig();
+  renderCurrenciesGrid();
+  if (document.getElementById("curPickModal").classList.contains("open")) renderPicker();
+}
+
+function selectCurrency(idx) {
+  state.selectedCurIndex = idx;
+  playSound("click");
+  renderApp();
+  scrollToElement('sectionCalculator');
+}
+
+/* ========================================================
+   RENDER: LIVE BOARD TABLE
+======================================================== */
+function renderBoardTable() {
+  const tbody = document.getElementById("boardTableBody");
+  
+  tbody.innerHTML = CURRENCIES.map((cur, idx) => {
+    const isSelected = idx === state.selectedCurIndex;
+    const flag = getFlagEmoji(cur[5]);
+    const mr = getMarketRate(cur);
+    const offerRate = getCustomerOfferRate(cur);
+    
+    let mrText = "—";
+    if (mr) {
+      mrText = (mr < 1)
+        ? `১ ${cur[0]} = ${formatNumber(1 / mr, 2)} SAR`
+        : `১ SAR = ${formatNumber(mr, cur[3])} ${cur[0]}`;
+    }
+    let offerText = "—";
+    if (offerRate) {
+      offerText = (offerRate < 1)
+        ? `১ ${cur[0]} = ${formatNumber(1 / offerRate, 2)} SAR`
+        : `১ SAR = ${formatNumber(offerRate, cur[3])} ${cur[0]}`;
+    }
+    
+    return `
+      <tr class="table-row-selectable ${isSelected ? 'selected' : ''}" data-index="${idx}" style="cursor:pointer;">
+        <td>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span style="font-size:1.2rem;">${flag}</span>
+            <div style="font-weight:700;">${getCurName(cur).split(" ")[0]} <small style="color:var(--text-muted);">(${cur[0]})</small></div>
+          </div>
+        </td>
+        <td style="color:var(--text-muted); font-size:0.8rem;">${mrText}</td>
+        <td>
+          <b style="color:var(--brand-700); font-size:0.82rem;">${offerText}</b>
+        </td>
+      </tr>
+    `;
+  }).join("");
+  
+  tbody.querySelectorAll("tr").forEach(tr => {
+    tr.addEventListener("click", () => {
+      const idx = parseInt(tr.dataset.index, 10);
+      selectCurrency(idx);
+    });
+  });
+}
+
+/* ========================================================
+   RENDER: MULTI-CURRENCY COMPARISON MATRIX
+======================================================== */
+function renderMatrix() {
+  const container = document.getElementById("quickMatrixGrid");
+  if (!container) return;
+  const isBuy = state.calcMode === "buy";
+  
+  container.innerHTML = TOP_MATRIX_CURRENCIES.map(code => {
+    const curIdx = CURRENCIES.findIndex(c => c[0] === code);
+    if (curIdx === -1) return "";
+    const cur = CURRENCIES[curIdx];
+    const rate = getCustomerOfferRate(cur);
+    const flag = getFlagEmoji(cur[5]);
+    
+    let valText = "";
+    if (isBuy) {
+      const testForeign = (code === "USD" || code === "EUR") ? 100 : 1000;
+      const sarGot = rate ? testForeign / rate : 0;
+      valText = `${formatNumber(sarGot, 1)} SAR`;
+    } else {
+      const foreignGot = rate ? 1000 * rate : 0;
+      valText = `${formatNumber(foreignGot, 0)} ${code}`;
+    }
+    
+    return `
+      <div class="matrix-card" data-index="${curIdx}">
+        <div class="matrix-flag">${flag}</div>
+        <div class="matrix-country">${cur[1].split(" ")[0]}</div>
+        <div class="matrix-amount">${valText}</div>
+      </div>
+    `;
+  }).join("");
+  
+  container.querySelectorAll(".matrix-card").forEach(c => {
+    c.addEventListener("click", () => {
+      const idx = parseInt(c.dataset.index, 10);
+      selectCurrency(idx);
+    });
+  });
+}
+
+/* ========================================================
+   CALCULATOR LOGIC & QUICK CHIPS
+======================================================== */
+function setupChips() {
+  const cur = CURRENCIES[state.selectedCurIndex];
+  const container = document.getElementById("quickChipsRow");
+  const isBuy = state.calcMode === "buy";
+  
+  let chipValues = [];
+  if (isBuy) {
+    const code = cur[0];
+    if (code === "USD" || code === "EUR" || code === "GBP" || code === "KWD" || code === "BHD" || code === "OMR") {
+      chipValues = [50, 100, 200, 500, 1000];
+    } else {
+      chipValues = [500, 1000, 2000, 5000, 10000, 20000];
+      const mr = getMarketRate(cur);
+      if (mr && mr >= 200) { // বড় অঙ্কের কারেন্সি: ৫০–৫০০০ SAR সমমানের গোল সংখ্যা
+        const nice = (x) => { const p = Math.pow(10, Math.floor(Math.log10(x))); return Math.round(x / p) * p; };
+        chipValues = [100, 300, 500, 1000, 2000, 5000].map(sar => nice(sar * mr));
+      }
+    }
+  } else {
+    chipValues = [100, 500, 1000, 2000, 3000, 5000];
+  }
+  
+  container.innerHTML = chipValues.map(v => {
+    return `<button class="chip-btn" data-val="${v}">${formatNumber(v, 0)}</button>`;
+  }).join("");
+  
+  container.querySelectorAll(".chip-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.getElementById("calcInputAmount").value = btn.dataset.val;
+      document.getElementById("btnClearInput").style.display = "block";
+      playSound("click");
+      calculateExchange();
+    });
+  });
+}
+
+function calculateExchange() {
+  const cur = CURRENCIES[state.selectedCurIndex];
+  const inputEl = document.getElementById("calcInputAmount");
+  const clearBtn = document.getElementById("btnClearInput");
+  const amount = parseFloat(inputEl.value) || 0;
+  
+  clearBtn.style.display = inputEl.value ? "block" : "none";
+  
+  const mktRate = getMarketRate(cur);
+  const offerRate = getCustomerOfferRate(cur);
+  
+  const isBuy = state.calcMode === "buy";
+  const resultValEl = document.getElementById("calcResultValue");
+  const profitChip = document.getElementById("calcProfitChip");
+  const profitText = document.getElementById("calcProfitText");
+  const resultLabel = document.getElementById("calcResultLabel");
+  
+  if (!offerRate || !mktRate) {
+    resultValEl.textContent = "—";
+    profitChip.style.display = "inline-flex";
+    profitText.textContent = "রেট অনুপলব্ধ";
+    return;
+  }
+  
+  if (isBuy) {
+    const payoutSAR = amount / offerRate;
+    const marketSAR = amount / mktRate;
+    const profitSAR = marketSAR - payoutSAR;
+    
+    resultLabel.textContent = t("payoutSARLabel");
+    resultValEl.textContent = `${formatNumber(payoutSAR, 2)} SAR`;
+    
+    profitChip.style.display = "inline-flex";
+    profitText.innerHTML = `${t("marketLabel")} ${formatNumber(marketSAR, 2)} SAR · ` + (profitSAR >= 0
+      ? `${t("profitLabel")} <b>+${formatNumber(profitSAR, 2)} SAR</b>`
+      : `<span class="loss-text">${t("lossLabel")} ${formatNumber(profitSAR, 2)} SAR</span>`);
+  } else {
+    const payoutForeign = amount * offerRate;
+    const marketForeign = amount * mktRate;
+    const diffForeign = marketForeign - payoutForeign;
+    const profitSAR = diffForeign / mktRate;
+    
+    resultLabel.textContent = t("payoutForeignLabel", { cur: cur[0] });
+    resultValEl.textContent = `${cur[2]} ${formatNumber(payoutForeign, cur[3])} ${cur[0]}`;
+    
+    profitChip.style.display = "inline-flex";
+    profitText.innerHTML = `${t("marketLabel")} ${cur[2]} ${formatNumber(marketForeign, cur[3])} · ` + (profitSAR >= 0
+      ? `${t("profitLabel")} <b>+${formatNumber(profitSAR, 2)} SAR</b>`
+      : `<span class="loss-text">${t("lossLabel")} ${formatNumber(profitSAR, 2)} SAR</span>`);
+  }
+}
+
+/* ========================================================
+   RENDER: MAIN HIGHLIGHT BANNER
+======================================================== */
+function renderHighlight() {
+  const cur = CURRENCIES[state.selectedCurIndex];
+  const flag = getFlagEmoji(cur[5]);
+  const mr = getMarketRate(cur);
+  const offerRate = getCustomerOfferRate(cur);
+  const hasCustom = getOverride(cur[0]) > 0;
+  const isBuy = state.calcMode === "buy";
+  
+  document.getElementById("highlightFlag").textContent = flag;
+  document.getElementById("highlightName").textContent = getCurName(cur).split(" ")[0];
+  document.getElementById("highlightCode").textContent = `(${cur[0]})`;
+  
+  const hlMkt = document.getElementById("hlMarketRate");
+  const hlMktAlt = document.getElementById("hlMarketAlt");
+  if (mr) {
+    if (mr >= 1) {
+      hlMkt.textContent = `১ SAR = ${formatNumber(mr, cur[3])} ${cur[0]}`;
+      hlMktAlt.textContent = `১ ${cur[0]} = ${formatNumber(1 / mr, 4)} SAR`;
+    } else {
+      hlMkt.textContent = `১ ${cur[0]} = ${formatNumber(1 / mr, 4)} SAR`;
+      hlMktAlt.textContent = `১ SAR = ${formatNumber(mr, cur[3])} ${cur[0]}`;
+    }
+  } else {
+    hlMkt.textContent = "—";
+    hlMktAlt.textContent = "";
+  }
+  
+  const hlOffer = document.getElementById("hlOfferRate");
+  const hlMargin = document.getElementById("hlOfferMargin");
+  const hlOfferTitle = document.getElementById("hlOfferTitle");
+  
+  hlOfferTitle.textContent = isBuy ? (state.lang === "en" ? "Buy Rate:" : "ক্রয় রেট (Buy):") : (state.lang === "en" ? "Sell Rate:" : "বিক্রয় রেট (Sell):");
+  
+  if (offerRate) {
+    if (mr && mr < 1) {
+      hlOffer.textContent = `১ ${cur[0]} = ${formatNumber(1 / offerRate, 4)} SAR`;
+      if (hasCustom) {
+        hlMargin.textContent = `কাস্টম রেট কার্যকর (✎) · (১ SAR = ${formatNumber(offerRate, cur[3])} ${cur[0]})`;
+      } else {
+        hlMargin.textContent = `মার্জিন: ${state.config.margin}% লাভ · (১ SAR = ${formatNumber(offerRate, cur[3])} ${cur[0]})`;
+        if (CASH_RATE_WARN.includes(cur[0])) hlMargin.textContent += " · ⚠ অফিসিয়াল রেট, ক্যাশ রেট আলাদা হতে পারে";
+      }
+    } else {
+      hlOffer.textContent = `১ SAR = ${formatNumber(offerRate, cur[3])} ${cur[0]}`;
+      if (hasCustom) {
+        hlMargin.textContent = "কাস্টম রেট কার্যকর (✎)";
+      } else {
+        hlMargin.textContent = `মার্জিন: ${state.config.margin}% লাভ`;
+        if (CASH_RATE_WARN.includes(cur[0])) hlMargin.textContent += " · ⚠ অফিসিয়াল রেট, ক্যাশ রেট আলাদা হতে পারে";
+      }
+    }
+  } else {
+    hlOffer.textContent = "—";
+    hlMargin.textContent = "";
+  }
+  
+  const customInput = document.getElementById("inputCustomRate");
+  const customHelp = document.getElementById("customRateHelp");
+  document.getElementById("customRateModeLabel").textContent = isBuy ? "(ক্রয়)" : "(বিক্রয়)";
+  
+  if (mr && mr < 1) {
+    const defaultPlaceholder = (1 / mr).toFixed(2);
+    customInput.placeholder = `যেমন: ${defaultPlaceholder}`;
+    if (customHelp) customHelp.textContent = `১ ${cur[0]} = কত SAR দিতে/নিতে চান? (যেমন: ${defaultPlaceholder})`;
+    if (document.activeElement !== customInput) {
+      customInput.value = hasCustom ? (1 / getOverride(cur[0])).toFixed(4) : "";
+    }
+  } else {
+    const defaultPlaceholder = mr ? mr.toFixed(2) : "33.70";
+    customInput.placeholder = `যেমন: ${defaultPlaceholder}`;
+    if (customHelp) customHelp.textContent = `১ SAR = কত ${cur[0]} দিতে/নিতে চান?`;
+    if (document.activeElement !== customInput) {
+      customInput.value = hasCustom ? getOverride(cur[0]) : "";
+    }
+  }
+}
+
+/* ========================================================
+   FULL APP RENDER
+======================================================== */
+function renderApp() {
+  renderCurrenciesGrid();
+  renderBoardTable();
+  renderHighlight();
+  renderMatrix();
+  
+  const cur = CURRENCIES[state.selectedCurIndex];
+  const isBuy = state.calcMode === "buy";
+  
+  const tabBuy = document.getElementById("tabBuyCur");
+  const tabSell = document.getElementById("tabSellCur");
+  tabBuy.className = `calc-tab-btn ${isBuy ? 'active' : ''}`;
+  tabSell.className = `calc-tab-btn ${!isBuy ? 'active' : ''}`;
+  
+  document.getElementById("tabBuyLabel").textContent = t("tabBuySub", { cur: cur[0] });
+  document.getElementById("tabSellLabel").textContent = t("tabSellSub", { cur: cur[0] });
+  
+  document.getElementById("calcInputLabel").textContent = isBuy
+    ? t("calcInputBuyLabel", { cur: cur[0] })
+    : t("calcInputSellLabel", { cur: cur[0] });
+  document.getElementById("calcInputCurTag").textContent = isBuy ? cur[0] : "SAR";
+  
+  setupChips();
+  calculateExchange();
+  renderLedger();
+  document.getElementById("curPickLabel").textContent = `${getFlagEmoji(cur[5])} ${cur[0]} · ${t("btnChangeCur")}`;
+}
+
+/* ========== CURRENCY PICKER POP-UP ========== */
+let pickRegion = "all", pickQuery = "";
+function getPickRegions() {
+  return [
+    ["all", t("regAll")],
+    ["fav", t("regFav")],
+    ["mideast", t("regMideast")],
+    ["asia", t("regAsia")],
+    ["africa", t("regAfrica")],
+    ["global", t("regGlobal")]
+  ];
+}
+
+function renderPicker() {
+  const q = pickQuery.trim().toLowerCase();
+  document.getElementById("pickChips").innerHTML = getPickRegions().map(r =>
+    `<button type="button" class="pk-chip ${pickRegion === r[0] ? "active" : ""}" data-r="${r[0]}">${r[1]}</button>`).join("");
+  const list = CURRENCIES.map((c, i) => [c, i]).filter(([c]) => {
+    if (pickRegion === "fav" && !state.config.favorites.includes(c[0])) return false;
+    if (pickRegion !== "all" && pickRegion !== "fav" && c[4] !== pickRegion) return false;
+    if (!q) return true;
+    let en = ""; try { en = regionNames ? (regionNames.of(c[5]) || "").toLowerCase() : ""; } catch (e) {}
+    return c[0].toLowerCase().includes(q) || c[1].toLowerCase().includes(q) || en.includes(q);
+  });
+  document.getElementById("pickList").innerHTML = list.length ? list.map(([c, i]) => {
+    const r = getCustomerOfferRate(c);
+    let rText = "—";
+    if (r) {
+      rText = (r < 1)
+        ? "১ " + c[0] + " = " + formatNumber(1 / r, 2) + " SAR"
+        : "১ SAR = " + formatNumber(r, c[3]) + " " + c[0];
+    }
+    return `<button type="button" class="pk-row ${i === state.selectedCurIndex ? "sel" : ""}" data-i="${i}">
+      <span class="pk-flag">${getFlagEmoji(c[5])}</span>
+      <span class="pk-name">${esc(getCurName(c))}<small>${c[0]}</small></span>
+      <span class="pk-star" data-pin="${c[0]}" title="ফেভারিট">${state.config.favorites.includes(c[0]) ? "★" : "☆"}</span>
+      <span class="pk-rate">${rText}${i === state.selectedCurIndex ? " ✓" : ""}</span>
+    </button>`;
+  }).join("") : `<div style="text-align:center; color:var(--text-light); padding:20px; font-weight:700;">কোনো কারেন্সি পাওয়া যায়নি</div>`;
+}
+
+function openPicker() {
+  pickQuery = ""; document.getElementById("pickSearch").value = "";
+  document.getElementById("pickCount").textContent = `(${CURRENCIES.length}টি)`;
+  renderPicker();
+  document.getElementById("curPickModal").classList.add("open");
+  playSound("click");
+  if (window.innerWidth > 700) document.getElementById("pickSearch").focus();
+}
+
+function scrollToElement(elementId) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop) - 8;
+  try { window.scrollTo({ top: top, behavior: "smooth" }); }
+  catch (e) { try { el.scrollIntoView(true); } catch (e2) { window.scrollTo(0, top); } }
+}
+
+/* ========================================================
+   DAILY TRANSACTIONS LEDGER & CSV EXPORT
+======================================================== */
+function addToLedger(extra) {
+  const cur = CURRENCIES[state.selectedCurIndex];
+  const inputEl = document.getElementById("calcInputAmount");
+  const amount = parseFloat(inputEl.value) || 0;
+  if (amount <= 0) {
+    showToast("সঠিক টাকার পরিমাণ লিখুন");
+    return null;
+  }
+  
+  const mkt = getMarketRate(cur);
+  const offerRate = getCustomerOfferRate(cur);
+  if (!offerRate || !mkt) return null;
+  
+  const isBuy = state.calcMode === "buy";
+  let volumeSAR = 0;
+  let payoutText = "";
+  let profitSAR = 0;
+  
+  if (isBuy) {
+    const payoutSAR = amount / offerRate;
+    volumeSAR = payoutSAR;
+    payoutText = `${formatNumber(payoutSAR, 2)} SAR`;
+    const marketSAR = amount / mkt;
+    profitSAR = marketSAR - payoutSAR;
+  } else {
+    volumeSAR = amount;
+    const payoutForeign = amount * offerRate;
+    payoutText = `${cur[2]} ${formatNumber(payoutForeign, cur[3])} ${cur[0]}`;
+    const diffForeign = (amount * mkt) - payoutForeign;
+    profitSAR = diffForeign / mkt;
+  }
+  
+  const now = new Date();
+  const entry = {
+    id: Date.now(),
+    day: dayKey(now),
+    date: now.toLocaleDateString(),
+    time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    type: isBuy ? `${cur[0]} ক্রয়` : `SAR বিক্রয়`,
+    amountIn: isBuy ? `${formatNumber(amount, cur[3])} ${cur[0]}` : `${formatNumber(amount, 2)} SAR`,
+    volumeSAR: volumeSAR,
+    payout: payoutText,
+    profitSAR: profitSAR
+  };
+  if (extra) Object.assign(entry, extra);
+  
+  state.ledger.unshift(entry);
+  saveLedger();
+  renderLedger();
+  if (!extra) showToast(storageOK ? "খাতায় সেভ হয়েছে!" : "⚠ সেভ হয়েছে, কিন্তু এই ব্রাউজারে পেজ বন্ধ করলে মুছে যাবে");
+  return entry;
+}
+
+function deleteLedgerEntry(id) {
+  state.ledger = state.ledger.filter(item => item.id !== id);
+  saveLedger();
+  renderLedger();
+  showToast("মুছে ফেলা হয়েছে");
+}
+
+function clearLedger() {
+  if (state.ledger.length === 0) return;
+  if (confirm("আজকের সমস্ত লেনদেন মুছে ফেলতে চান? (পুরনো দিনের হিসাব থেকে যাবে)")) {
+    const today = dayKey(new Date());
+    state.ledger = state.ledger.filter(it => entryDay(it) !== today);
+    saveLedger();
+    renderLedger();
+    showToast("খাতা খালি করা হয়েছে");
+  }
+}
+
+function renderLedger() {
+  const tbody = document.getElementById("ledgerTableBody");
+  const statCount = document.getElementById("statTotalTrans");
+  const statVol = document.getElementById("statTotalVolume");
+  const statProf = document.getElementById("statTotalProfit");
+  
+  let warn = document.getElementById("ledgerWarn");
+  if (!storageOK && !warn) {
+    warn = document.createElement("div");
+    warn.id = "ledgerWarn";
+    warn.style.cssText = "background:#fef2f2; color:#dc2626; border:1.5px solid #fecaca; border-radius:10px; padding:8px 10px; margin-bottom:10px; font-size:0.8rem; font-weight:700; line-height:1.4;";
+    warn.textContent = "⚠ এই ব্রাউজারে খাতা সেভ থাকবে না (পেজ বন্ধ করলে মুছে যাবে)। ফাইল ম্যানেজার/হোয়াটসঅ্যাপ থেকে না খুলে Chrome-এ হোস্ট করা লিংক বা ফাইল থেকে খুলুন, আর নিয়মিত 📥 CSV নিন।";
+    statCount.closest(".ledger-stat-bar").insertAdjacentElement("beforebegin", warn);
+  }
+  const today = dayKey(new Date());
+  const todays = state.ledger.filter(it => entryDay(it) === today);
+  statCount.textContent = `${todays.length} টি`;
+  
+  let totalVol = 0;
+  let totalProf = 0;
+  todays.forEach(item => {
+    totalVol += item.volumeSAR || 0;
+    totalProf += item.profitSAR || 0;
+  });
+  
+  statVol.textContent = `${formatNumber(totalVol, 1)} SAR`;
+  statProf.textContent = `${formatNumber(totalProf, 1)} SAR`;
+  
+  if (todays.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align:center; color:var(--text-light); padding:12px;">
+          আজকের কোনো লেনদেন এখনো নেই।
+        </td>
+      </tr>
+    `;
+    return;
+  }
+  
+  tbody.innerHTML = todays.map(item => {
+    return `
+      <tr>
+        <td style="font-size:0.75rem; color:var(--text-muted);">${esc(item.time)}</td>
+        <td><b>${esc(item.type)}</b>${item.voucher ? `<br><small style="color:var(--text-light);">#${esc(String(item.voucher).split("-").pop())}${item.custName ? " · " + esc(String(item.custName).slice(0, 10)) : ""}</small>` : ""}</td>
+        <td>${item.amountIn}</td>
+        <td style="font-weight:700; color:var(--brand-700);">${item.payout}</td>
+        <td style="font-weight:700; color:${item.profitSAR < 0 ? "var(--danger-600)" : "#059669"};">${item.profitSAR < 0 ? "" : "+"}${formatNumber(item.profitSAR, 1)}</td>
+        <td>
+          <button style="border:none; background:none; color:var(--danger-600); cursor:pointer; font-size:1.1rem; padding:0 4px;" onclick="deleteLedgerEntry(${item.id})">
+            &times;
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function exportLedgerToCSV() {
+  if (state.ledger.length === 0) {
+    showToast("কোনো লেনদেন নেই");
+    return;
+  }
+  
+  const q = (v) => {
+    let str = String(v == null ? "" : v);
+    if (/^[=+\-@\t\r]/.test(str)) str = "'" + str; // Excel formula injection protection
+    return `"${str.replace(/"/g, '""')}"`;
+  };
+  const headers = ["ID", "Date", "Time", "Voucher", "Customer", "Phone", "Type", "AmountIn", "VolumeSAR", "Payout", "ProfitSAR"];
+  const rows = state.ledger.map(i => [
+    i.id,
+    q(entryDay(i)),
+    q(i.time),
+    q(i.voucher),
+    q(i.custName),
+    q(i.custPhone),
+    q(i.type),
+    q(i.amountIn),
+    i.volumeSAR.toFixed(2),
+    q(i.payout),
+    i.profitSAR.toFixed(2)
+  ]);
+  
+  const csvContent = "\uFEFF" + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `Al_Oriyes_Jeddah_${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 1500);
+  showToast("CSV ডাউনলোড হয়েছে!");
+}
+
+
+
+/* ========================================================
+   DAILY CLOSING SUMMARY (Z-REPORT) LOGIC
+======================================================== */
+function openDailyClosingModal() {
+  const today = dayKey(new Date());
+  const todays = state.ledger.filter(it => entryDay(it) === today);
+  
+  const d = new Date();
+  document.getElementById("closingDate").textContent = d.toLocaleDateString("bn-BD", { year: "numeric", month: "short", day: "numeric" });
+  document.getElementById("closingTime").textContent = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  
+  document.getElementById("closingTotalVouchers").textContent = `${todays.length} টি`;
+  
+  let totalVol = 0;
+  let totalProf = 0;
+  const curCounts = {};
+  
+  todays.forEach(it => {
+    totalVol += it.volumeSAR || 0;
+    totalProf += it.profitSAR || 0;
+    
+    const code = it.type ? it.type.split(" ")[0] : "অন্যান্য";
+    if (!curCounts[code]) curCounts[code] = { count: 0, vol: 0 };
+    curCounts[code].count += 1;
+    curCounts[code].vol += (it.volumeSAR || 0);
+  });
+  
+  document.getElementById("closingTotalVolume").textContent = `${formatNumber(totalVol, 2)} SAR`;
+  const profEl = document.getElementById("closingTotalProfit");
+  profEl.textContent = `${totalProf >= 0 ? "+" : ""}${formatNumber(totalProf, 2)} SAR`;
+  profEl.style.color = totalProf >= 0 ? "var(--brand-800)" : "var(--danger-600)";
+  
+  const breakdownDiv = document.getElementById("closingCurBreakdown");
+  if (todays.length === 0) {
+    breakdownDiv.innerHTML = `<div style="color:var(--text-light); text-align:center; padding:6px;">আজকের কোনো লেনদেন রেকর্ড করা নেই</div>`;
+  } else {
+    breakdownDiv.innerHTML = Object.entries(curCounts).map(([code, stat]) => `
+      <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
+        <span>• <b>${esc(code)}</b> (${stat.count} টি ভাউচার):</span>
+        <span>${formatNumber(stat.vol, 1)} SAR</span>
+      </div>
+    `).join("");
+  }
+  
+  document.getElementById("closingModal").classList.add("open");
+  playSound("click");
+}
+
+/* ========================================================
+   FULL BACKUP & RESTORE (JSON EXPORT / IMPORT)
+======================================================== */
+function exportBackupJSON() {
+  const data = {
+    appName: "Al Oriyes Exchange Jeddah",
+    version: "10.0",
+    exportedAt: new Date().toISOString(),
+    config: state.config,
+    ledger: state.ledger,
+    voucher: (function() {
+      try { return JSON.parse(localStorage.getItem("al_oriyes_voucher")); } catch(e) { return null; }
+    })(),
+    largeFont: state.largeFont
+  };
+  
+  const jsonStr = JSON.stringify(data, null, 2);
+  const blob = new Blob([jsonStr], { type: "application/json;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `Al_Oriyes_Backup_${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 1500);
+  showToast("সম্পূর্ণ ব্যাকআপ ফাইল ডাউনলোড হয়েছে!");
+}
+
+function importBackupJSON(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data || (!data.config && !data.ledger)) {
+        showToast("ভুল ফাইল ফরম্যাট! সঠিক JSON ব্যাকআপ ফাইল দিন।");
+        return;
+      }
+      if (data.config) {
+        state.config = Object.assign(state.config, data.config);
+        saveConfig();
+      }
+      if (Array.isArray(data.ledger)) {
+        state.ledger = data.ledger;
+        saveLedger();
+      }
+      if (data.voucher) {
+        try { localStorage.setItem("al_oriyes_voucher", JSON.stringify(data.voucher)); } catch(e) {}
+      }
+      if (data.largeFont !== undefined) {
+        state.largeFont = Boolean(data.largeFont);
+        document.body.classList.toggle("font-large", state.largeFont);
+        try { localStorage.setItem("al_oriyes_large_font", state.largeFont ? "true" : "false"); } catch(e) {}
+      }
+      renderApp();
+      showToast("ব্যাকআপ থেকে সফলভাবে সব তথ্য রিস্টোর হয়েছে!");
+    } catch(err) {
+      showToast("ব্যাকআপ ফাইল পড়তে সমস্যা হয়েছে!");
+    }
+  };
+  reader.readAsText(file);
+}
+
+/* ========================================================
+   SHARE TO WHATSAPP
+======================================================== */
+function generateQuoteText() {
+  const cur = CURRENCIES[state.selectedCurIndex];
+  const amount = parseFloat(document.getElementById("calcInputAmount").value) || 0;
+  const offerRate = getCustomerOfferRate(cur) || 0;
+  const isBuy = state.calcMode === "buy";
+  
+  const d = new Date();
+  const dateStr = d.toLocaleDateString("bn-BD", { month: "short", day: "numeric" });
+  const timeStr = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  
+  let payout = "";
+  if (isBuy) {
+    payout = `${formatNumber(amount / offerRate, 2)} SAR`;
+  } else {
+    payout = `${cur[2]} ${formatNumber(amount * offerRate, cur[3])} ${cur[0]}`;
+  }
+  
+  const quote = 
+`🏦 *AL ORIYES EXCHANGE - JEDDAH*
+📍 জেদ্দা শাখা, সৌদি আরব
+📅 ${dateStr} (${timeStr})
+━━━━━━━━━━━━━━━━━━━
+🪙 কারেন্সি: ${cur[1]} (${cur[0]})
+📊 এক্সচেঞ্জ রেট: ${offerRate < 1 ? `১ ${cur[0]} = ${formatNumber(1 / offerRate, 4)} SAR (১ SAR = ${formatNumber(offerRate, cur[3])} ${cur[0]})` : `১ SAR = ${formatNumber(offerRate, cur[3])} ${cur[0]}`}
+
+💵 ${isBuy ? 'কাস্টমার জমা দিচ্ছেন' : 'রিয়াল দিচ্ছেন'}: ${isBuy ? formatNumber(amount, cur[3]) + ' ' + cur[0] : formatNumber(amount, 2) + ' SAR'}
+🎯 *কাস্টমার ক্যাশ পাবেন*: *${payout}*
+━━━━━━━━━━━━━━━━━━━
+📍 আল ওরিয়েস এক্সচেঞ্জ, জেদ্দা`;
+
+  return quote;
+}
+
+function shareOnWhatsApp() {
+  const quote = generateQuoteText();
+  const url = `https://wa.me/?text=${encodeURIComponent(quote)}`;
+  window.open(url, "_blank");
+  playSound("click");
+}
+
+/* ========================================================
+   RECEIPT MODAL & PRINTING
+======================================================== */
+function voucherPeek() {
+  const d = dayKey(new Date());
+  let rec = { day: d, n: 0 };
+  try { const r = JSON.parse(localStorage.getItem("al_oriyes_voucher")); if (r && r.day === d) rec = r; } catch (e) {}
+  return { rec, no: "AO-JED-" + d.slice(2).replace(/-/g, "") + "-" + pad(rec.n + 1, 3) };
+}
+
+let receiptCommitted = false;
+function commitReceipt() {
+  if (receiptCommitted) return;
+  const p = voucherPeek();
+  const name = document.getElementById("custNameInput").value.trim();
+  const phone = document.getElementById("custPhoneInput").value.trim();
+  const extra = { voucher: p.no, custName: name, custPhone: phone };
+  // একই লেনদেন আগে খাতায় সেভ করা থাকলে সেটার সাথেই ভাউচার যুক্ত হবে (ডুপ্লিকেট নয়)
+  const cur = CURRENCIES[state.selectedCurIndex];
+  const amount = parseFloat(document.getElementById("calcInputAmount").value) || 0;
+  const isBuy = state.calcMode === "buy";
+  const amtText = isBuy ? `${formatNumber(amount, cur[3])} ${cur[0]}` : `${formatNumber(amount, 2)} SAR`;
+  const recent = state.ledger.find(it => !it.voucher && it.amountIn === amtText && Date.now() - it.id < 15 * 60000);
+  if (recent) { Object.assign(recent, extra); saveLedger(); renderLedger(); }
+  else if (!addToLedger(extra)) return;
+  try { localStorage.setItem("al_oriyes_voucher", JSON.stringify({ day: p.rec.day, n: p.rec.n + 1 })); } catch (e) {}
+  receiptCommitted = true;
+  showToast("ভাউচার " + p.no + " খাতায় সেভ হয়েছে");
+}
+
+function openReceiptModal() {
+  receiptCommitted = false;
+  const cur = CURRENCIES[state.selectedCurIndex];
+  const amount = parseFloat(document.getElementById("calcInputAmount").value) || 0;
+  const offerRate = getCustomerOfferRate(cur) || 0;
+  const isBuy = state.calcMode === "buy";
+  const flag = getFlagEmoji(cur[5]);
+  
+  const d = new Date();
+  const voucherCode = voucherPeek().no;
+  
+  document.getElementById("slipVoucherNo").textContent = voucherCode;
+  document.getElementById("slipDateTime").textContent = d.toLocaleString("en-US", {
+    month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit"
+  });
+  
+  document.getElementById("slipFlagIcon").textContent = flag;
+  document.getElementById("slipType").textContent = isBuy ? `কারেন্সি ক্রয় (${cur[0]} ➔ SAR)` : `কারেন্সি বিক্রয় (SAR ➔ ${cur[0]})`;
+  
+  if (isBuy) {
+    document.getElementById("slipInward").textContent = `${formatNumber(amount, cur[3])} ${cur[0]}`;
+    document.getElementById("slipAppliedRate").textContent = (offerRate < 1)
+      ? `১ ${cur[0]} = ${formatNumber(1 / offerRate, 4)} SAR`
+      : `১ SAR = ${formatNumber(offerRate, cur[3])} ${cur[0]}`;
+    document.getElementById("slipTotalLabel").textContent = `কাস্টমার পাবে (সৌদি রিয়াল):`;
+    document.getElementById("slipTotalAmount").textContent = `${formatNumber(amount / offerRate, 2)} SAR`;
+  } else {
+    document.getElementById("slipInward").textContent = `${formatNumber(amount, 2)} SAR`;
+    document.getElementById("slipAppliedRate").textContent = (offerRate < 1)
+      ? `১ ${cur[0]} = ${formatNumber(1 / offerRate, 4)} SAR`
+      : `১ SAR = ${formatNumber(offerRate, cur[3])} ${cur[0]}`;
+    document.getElementById("slipTotalLabel").textContent = `কাস্টমার পাবে (${cur[1].split(" ")[0]}):`;
+    document.getElementById("slipTotalAmount").textContent = `${cur[2]} ${formatNumber(amount * offerRate, cur[3])} ${cur[0]}`;
+  }
+  
+  document.getElementById("custNameInput").value = "";
+  document.getElementById("custPhoneInput").value = "";
+  document.getElementById("slipCustRow").style.display = "none";
+  
+  document.getElementById("receiptModal").classList.add("open");
+  playSound("click");
+}
+
+function updateReceiptCustomerInfo() {
+  const name = document.getElementById("custNameInput").value.trim();
+  const phone = document.getElementById("custPhoneInput").value.trim();
+  const row = document.getElementById("slipCustRow");
+  
+  if (name || phone) {
+    row.style.display = "flex";
+    document.getElementById("slipCustName").textContent = name || "—";
+    document.getElementById("slipCustPhone").textContent = phone || "";
+  } else {
+    row.style.display = "none";
+  }
+}
+
+/* ========================================================
+   CASH DENOMINATION COUNTER
+======================================================== */
+function setupDenominationInputs() {
+  const container = document.getElementById("denomInputsGrid");
+  container.innerHTML = DENOM_UNITS.map(unit => {
+    return `
+      <div class="denom-row">
+        <div class="denom-badge">${unit} SAR</div>
+        <input type="number" class="denom-input" data-unit="${unit}" placeholder="0" min="0" inputmode="numeric">
+        <div class="denom-subtotal" id="denomSub_${unit}">0 SAR</div>
+      </div>
+    `;
+  }).join("");
+  
+  container.querySelectorAll(".denom-input").forEach(input => {
+    input.addEventListener("input", calculateDenominations);
+  });
+}
+
+function calculateDenominations() {
+  let grandTotal = 0;
+  DENOM_UNITS.forEach(unit => {
+    const input = document.querySelector(`.denom-input[data-unit="${unit}"]`);
+    const count = parseInt(input.value, 10) || 0;
+    const subtotal = count * unit;
+    grandTotal += subtotal;
+    document.getElementById(`denomSub_${unit}`).textContent = `${formatNumber(subtotal, 0)} SAR`;
+  });
+  
+  document.getElementById("denomTotalAmount").textContent = `${formatNumber(grandTotal, 2)} SAR`;
+  return grandTotal;
+}
+
+function resetDenominations() {
+  document.querySelectorAll(".denom-input").forEach(i => i.value = "");
+  calculateDenominations();
+}
+
+function applyDenomToCalculator() {
+  const total = calculateDenominations();
+  if (total <= 0) {
+    showToast("নোট কাউন্ট করা হয়নি");
+    return;
+  }
+  
+  state.calcMode = "sell";
+  document.getElementById("calcInputAmount").value = total;
+  document.getElementById("denomModal").classList.remove("open");
+  renderApp();
+  showToast(`মোট ${formatNumber(total, 0)} SAR বসানো হয়েছে`);
+  scrollToElement('sectionCalculator');
+}
+
+/* ========================================================
+   COUNTDOWN TIMER TICKER
+======================================================== */
+function startCountdown() {
+  setInterval(() => {
+    if (state.countdownSeconds > 0) {
+      state.countdownSeconds--;
+    } else {
+      state.countdownSeconds = 1800;
+      fetchRates();
+    }
+    const mins = Math.floor(state.countdownSeconds / 60).toString().padStart(2, '0');
+    const secs = (state.countdownSeconds % 60).toString().padStart(2, '0');
+    const el = document.getElementById("countdownTimer");
+    if (el) el.textContent = `${mins}:${secs}`;
+  }, 1000);
+}
+
+/* ========================================================
+   EVENT LISTENERS & BINDINGS
+======================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  applyTranslations();
+  setupDenominationInputs();
+  startCountdown();
+
+  // Language toggle listener
+  const btnLang = document.getElementById("btnToggleLang");
+  if (btnLang) btnLang.addEventListener("click", toggleLanguage);
+
+  // Currency picker pop-up
+  document.getElementById("btnPickCurrency").addEventListener("click", openPicker);
+  document.getElementById("btnClosePick").addEventListener("click", () => document.getElementById("curPickModal").classList.remove("open"));
+  document.getElementById("pickSearch").addEventListener("input", (e) => { pickQuery = e.target.value; renderPicker(); });
+  document.getElementById("pickChips").addEventListener("click", (e) => {
+    const b = e.target.closest(".pk-chip"); if (!b) return;
+    pickRegion = b.dataset.r; renderPicker();
+  });
+  document.getElementById("pickList").addEventListener("click", (e) => {
+    const star = e.target.closest(".pk-star");
+    if (star) { toggleFavorite(star.dataset.pin); return; }
+    const b = e.target.closest(".pk-row"); if (!b) return;
+    state.selectedCurIndex = parseInt(b.dataset.i, 10);
+    document.getElementById("curPickModal").classList.remove("open");
+    playSound("success");
+    renderApp();
+    showToast(`${CURRENCIES[state.selectedCurIndex][0]} বেছে নেওয়া হয়েছে`);
+  });
+  
+  // Font Size Toggle
+  const fontBtn = document.getElementById("btnToggleFontSize");
+  if (state.largeFont) fontBtn.classList.add("active");
+  
+  fontBtn.addEventListener("click", () => {
+    state.largeFont = !state.largeFont;
+    if (state.largeFont) {
+      document.body.classList.add("font-large");
+      fontBtn.classList.add("active");
+      showToast("বড় ফন্ট অন");
+    } else {
+      document.body.classList.remove("font-large");
+      fontBtn.classList.remove("active");
+      showToast("স্বাভাবিক ফন্ট");
+    }
+    try { localStorage.setItem("al_oriyes_large_font", state.largeFont ? "true" : "false"); } catch (e) {}
+  });
+  
+  // Refresh Button
+  document.getElementById("btnRefresh").addEventListener("click", () => {
+    playSound("click");
+    fetchRates(true);
+  });
+  
+  // Mode Tabs
+  document.getElementById("tabBuyCur").addEventListener("click", () => {
+    state.calcMode = "buy";
+    playSound("click");
+    renderApp();
+  });
+  document.getElementById("tabSellCur").addEventListener("click", () => {
+    state.calcMode = "sell";
+    playSound("click");
+    renderApp();
+  });
+  
+  // Quick Swap Cur
+  document.getElementById("btnQuickSwapCur").addEventListener("click", () => {
+    state.calcMode = state.calcMode === "buy" ? "sell" : "buy";
+    playSound("click");
+    renderApp();
+  });
+  
+  // Calc Input change & Clear
+  document.getElementById("calcInputAmount").addEventListener("input", calculateExchange);
+  document.getElementById("btnClearInput").addEventListener("click", () => {
+    document.getElementById("calcInputAmount").value = "";
+    document.getElementById("btnClearInput").style.display = "none";
+    calculateExchange();
+  });
+  
+  // Search Input
+  const _si = document.getElementById("inputSearchCur");
+  if (_si) _si.addEventListener("input", (e) => {
+    state.searchQuery = e.target.value;
+    renderCurrenciesGrid();
+  });
+  
+  // Region Filter Tabs
+  document.querySelectorAll(".region-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".region-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      state.activeRegion = btn.dataset.region;
+      playSound("click");
+      renderCurrenciesGrid();
+    });
+  });
+  
+  // Margin Slider & Presets
+  const slider = document.getElementById("sliderMargin");
+  const marginDisp = document.getElementById("currentMarginDisplay");
+  slider.value = state.config.margin;
+  document.querySelectorAll(".margin-pill").forEach(p => p.classList.toggle("active", parseFloat(p.dataset.m) === Number(state.config.margin)));
+  const cvBtn = document.getElementById("btnCustomerView");
+  cvBtn.addEventListener("click", () => {
+    const on = document.body.classList.toggle("customer-view");
+    cvBtn.classList.toggle("active", on);
+    showToast(on ? "কাস্টমার ভিউ অন (লাভ ও মার্কেট রেট লুকানো)" : "কাস্টমার ভিউ অফ");
+  });
+  marginDisp.textContent = `${state.config.margin}%`;
+  
+  slider.addEventListener("input", (e) => {
+    const val = parseFloat(e.target.value) || 0;
+    state.config.margin = val;
+    marginDisp.textContent = `${val.toFixed(1)}%`;
+    saveConfig();
+    renderHighlight();
+    calculateExchange();
+    renderBoardTable();
+  });
+  
+  document.querySelectorAll(".margin-pill").forEach(pill => {
+    pill.addEventListener("click", () => {
+      document.querySelectorAll(".margin-pill").forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+      const m = parseFloat(pill.dataset.m);
+      state.config.margin = m;
+      slider.value = m;
+      marginDisp.textContent = `${m.toFixed(1)}%`;
+      saveConfig();
+      renderHighlight();
+      calculateExchange();
+      renderBoardTable();
+    });
+  });
+  
+  // Custom Rate Override (Smart conversion for USD, EUR, GBP, KWD, etc.)
+  document.getElementById("btnApplyCustomRate").addEventListener("click", () => {
+    const cur = CURRENCIES[state.selectedCurIndex];
+    const val = parseFloat(document.getElementById("inputCustomRate").value);
+    const map = state.calcMode === "buy" ? state.config.overrideBuy : state.config.overrideSell;
+    const mr = getMarketRate(cur);
+    if (val && val > 0) {
+      let storedVal = val;
+      // Foreign currency stronger than SAR (e.g. USD, EUR, GBP, KWD where mr < 1):
+      // Cashier typed e.g. 3.75 (SAR per 1 Foreign Unit, val > 1):
+      if (mr && mr < 1 && val > 1) {
+        storedVal = 1 / val;
+      }
+      map[cur[0]] = storedVal;
+      showToast(`${cur[0]} কাস্টম রেট সেভ হয়েছে (${state.calcMode === "buy" ? "ক্রয়" : "বিক্রয়"})`);
+    } else {
+      delete map[cur[0]];
+    }
+    saveConfig();
+    renderHighlight();
+    calculateExchange();
+    renderBoardTable();
+  });
+  
+  document.getElementById("btnClearCustomRate").addEventListener("click", () => {
+    const cur = CURRENCIES[state.selectedCurIndex];
+    delete (state.calcMode === "buy" ? state.config.overrideBuy : state.config.overrideSell)[cur[0]];
+    document.getElementById("inputCustomRate").value = "";
+    saveConfig();
+    renderApp();
+    showToast(`${cur[0]} রিসেট হয়েছে`);
+  });
+  
+  // WhatsApp Share & Receipt Actions
+  document.getElementById("btnShareWhatsApp").addEventListener("click", shareOnWhatsApp);
+  document.getElementById("btnOpenReceiptModal").addEventListener("click", openReceiptModal);
+  document.getElementById("btnCloseReceipt").addEventListener("click", () => {
+    document.getElementById("receiptModal").classList.remove("open");
+  });
+  
+  document.getElementById("btnPrintReceipt").addEventListener("click", () => {
+    commitReceipt();
+    window.print();
+  });
+  
+  document.getElementById("btnShareReceiptWA").addEventListener("click", () => {
+    commitReceipt();
+    shareOnWhatsApp();
+  });
+  
+  document.getElementById("custNameInput").addEventListener("input", updateReceiptCustomerInfo);
+  document.getElementById("custPhoneInput").addEventListener("input", updateReceiptCustomerInfo);
+  
+  // Cash Denomination Drawer
+  document.getElementById("dockNavDenom").addEventListener("click", () => {
+    document.getElementById("denomModal").classList.add("open");
+    playSound("click");
+  });
+  document.getElementById("dockNavReceipt").addEventListener("click", openReceiptModal);
+  document.getElementById("btnCloseDenom").addEventListener("click", () => {
+    document.getElementById("denomModal").classList.remove("open");
+  });
+  document.getElementById("btnResetDenom").addEventListener("click", resetDenominations);
+  document.getElementById("btnApplyDenomToCalc").addEventListener("click", applyDenomToCalculator);
+  
+  // Sound Toggle
+  document.getElementById("btnToggleSound").addEventListener("click", () => {
+    state.soundEnabled = !state.soundEnabled;
+    const icon = document.getElementById("soundIcon");
+    if (state.soundEnabled) {
+      icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+      showToast("সাউন্ড অন");
+    } else {
+      icon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+      showToast("সাউন্ড অফ");
+    }
+  });
+  
+  // Ledger Actions
+  document.getElementById("btnSaveToLedger").addEventListener("click", addToLedger);
+  document.getElementById("btnClearLedger").addEventListener("click", clearLedger);
+  document.getElementById("btnExportCSV").addEventListener("click", exportLedgerToCSV);
+  
+  // JSON Backup and Restore
+  const btnBackup = document.getElementById("btnBackupJSON");
+  if (btnBackup) btnBackup.addEventListener("click", exportBackupJSON);
+  
+  const btnRestore = document.getElementById("btnRestoreJSON");
+  const fileInput = document.getElementById("inputRestoreJSON");
+  if (btnRestore && fileInput) {
+    btnRestore.addEventListener("click", () => fileInput.click());
+    fileInput.addEventListener("change", (e) => {
+      if (e.target.files && e.target.files[0]) {
+        importBackupJSON(e.target.files[0]);
+        fileInput.value = "";
+      }
+    });
+  }
+  
+  // Daily Closing Modal Actions
+  const btnClosing = document.getElementById("btnDailyClosing");
+  if (btnClosing) btnClosing.addEventListener("click", openDailyClosingModal);
+  
+  const btnCloseClosing = document.getElementById("btnCloseClosing");
+  if (btnCloseClosing) btnCloseClosing.addEventListener("click", () => document.getElementById("closingModal").classList.remove("open"));
+  
+  const btnDismissClosing = document.getElementById("btnDismissClosing");
+  if (btnDismissClosing) btnDismissClosing.addEventListener("click", () => document.getElementById("closingModal").classList.remove("open"));
+  
+  const btnPrintClosing = document.getElementById("btnPrintClosing");
+  if (btnPrintClosing) btnPrintClosing.addEventListener("click", () => window.print());
+
+  // COUNTER KEYBOARD SHORTCUTS
+  window.addEventListener("keydown", (e) => {
+    // 1. ESC: Close active modal
+    if (e.key === "Escape") {
+      document.querySelectorAll(".modal-overlay.open").forEach(m => m.classList.remove("open"));
+    }
+    // 2. Alt + S / F4: Toggle Buy/Sell mode
+    if ((e.altKey && (e.key === "s" || e.key === "S")) || e.key === "F4") {
+      e.preventDefault();
+      state.calcMode = state.calcMode === "buy" ? "sell" : "buy";
+      playSound("click");
+      renderApp();
+      showToast(state.calcMode === "buy" ? "ক্রয় মোড (Buy)" : "বিক্রয় মোড (Sell)");
+    }
+    // 3. F2: Focus amount input
+    if (e.key === "F2") {
+      e.preventDefault();
+      const inp = document.getElementById("calcInputAmount");
+      if (inp) { inp.focus(); inp.select(); }
+    }
+    // 4. Ctrl + P: Open receipt modal if not already open
+    if (e.ctrlKey && (e.key === "p" || e.key === "P")) {
+      const modal = document.getElementById("receiptModal");
+      if (!modal.classList.contains("open")) {
+        e.preventDefault();
+        openReceiptModal();
+      }
+    }
+  });
+
+  // ONLINE / OFFLINE REALTIME DETECTOR
+  window.addEventListener("offline", () => {
+    updateStatusUI();
+    showToast("⚠️ ওয়াইফাই/ইন্টারনেট বন্ধ! অফলাইন মোড সচল রয়েছে।");
+  });
+
+  window.addEventListener("online", () => {
+    updateStatusUI();
+    showToast("🟢 ইন্টারনেট পুনরায় চালু হয়েছে! রেট রিফ্রেশ হচ্ছে...");
+    fetchRates(true);
+  });
+
+  // PWA SERVICE WORKER & INSTALL PROMPT
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js").catch(() => {});
+    });
+  }
+
+  // PWA SERVICE WORKER & AUTOMATIC INSTALL PROMPT
+  let deferredPWA = null;
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+  function showInstallPopup() {
+    if (isStandalone) return;
+    if (sessionStorage.getItem("pwa_dismissed") === "1") return;
+    const popup = document.getElementById("pwaInstallPopup");
+    if (popup) {
+      popup.style.display = "flex";
+      playSound("click");
+    }
+  }
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPWA = e;
+    
+    // Show the header button
+    const btn = document.getElementById("btnInstallPWA");
+    if (btn) btn.style.display = "inline-flex";
+
+    // Automatically trigger the popup after 1.5 seconds on smartphone / desktop!
+    setTimeout(showInstallPopup, 1500);
+  });
+
+  // Handle header button install click
+  const btnInstall = document.getElementById("btnInstallPWA");
+  if (btnInstall) {
+    btnInstall.addEventListener("click", () => {
+      if (deferredPWA) {
+        deferredPWA.prompt();
+        deferredPWA.userChoice.then(() => {
+          deferredPWA = null;
+          btnInstall.style.display = "none";
+          const popup = document.getElementById("pwaInstallPopup");
+          if (popup) popup.style.display = "none";
+        });
+      } else {
+        showToast(state.lang === "en" 
+          ? "Tap browser menu (⋮) and select 'Install app' or 'Add to Home screen'" 
+          : "ব্রাউজারের ৩ ডট মেনু (⋮) থেকে 'Install app' বা 'Add to Home screen' দিন");
+      }
+    });
+  }
+
+  // Handle popup banner install click
+  const popupInstallBtn = document.getElementById("btnPwaPopupInstall");
+  if (popupInstallBtn) {
+    popupInstallBtn.addEventListener("click", () => {
+      const popup = document.getElementById("pwaInstallPopup");
+      if (deferredPWA) {
+        deferredPWA.prompt();
+        deferredPWA.userChoice.then(() => {
+          deferredPWA = null;
+          if (popup) popup.style.display = "none";
+          if (btnInstall) btnInstall.style.display = "none";
+        });
+      } else {
+        showToast(state.lang === "en" 
+          ? "Tap browser menu (⋮) and select 'Install app' or 'Add to Home screen'" 
+          : "ব্রাউজারের ৩ ডট মেনু (⋮) থেকে 'Install app' বা 'Add to Home screen' দিন");
+        if (popup) popup.style.display = "none";
+      }
+    });
+  }
+
+  // Handle popup banner dismiss click
+  const popupDismissBtn = document.getElementById("btnPwaPopupDismiss");
+  if (popupDismissBtn) {
+    popupDismissBtn.addEventListener("click", () => {
+      const popup = document.getElementById("pwaInstallPopup");
+      if (popup) popup.style.display = "none";
+      sessionStorage.setItem("pwa_dismissed", "1");
+    });
+  }
+
+  // iOS Safari Detection & Guided Prompt
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  if (isIOS && !isStandalone && sessionStorage.getItem("pwa_dismissed") !== "1") {
+    setTimeout(() => {
+      const popup = document.getElementById("pwaInstallPopup");
+      const desc = document.getElementById("pwaPopupDesc");
+      const btn = document.getElementById("btnPwaPopupInstall");
+      if (desc) desc.textContent = "নিচে Share (⎋) বাটনে ট্যাপ করে 'Add to Home Screen' চাপুন";
+      if (btn) btn.style.display = "none";
+      if (popup) popup.style.display = "flex";
+    }, 2500);
+  }
+
+  // Close modal on backdrop
+  window.addEventListener("click", (e) => {
+    if (e.target.classList.contains("modal-overlay")) {
+      e.target.classList.remove("open");
+    }
+  });
+  
+  // Initial live fetch
+  fetchRates();
+});
+</script>
+</body>
+</html>
